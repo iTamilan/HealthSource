@@ -12,94 +12,94 @@ extension HealthKtiManager{
     private func getAllReadQuantityTypeIdentifiers() -> [HKQuantityTypeIdentifier] {
         
         return [
-            .bodyMassIndex,
-            .bodyFatPercentage,
-            .height,
-            .bodyMass,
-            .leanBodyMass,
-            .waistCircumference,
+            //            .bodyMassIndex,
+            //            .bodyFatPercentage,
+            //            .height,
+            //            .bodyMass,
+            //            .leanBodyMass,
+            //            .waistCircumference,
             //Fitness
             .stepCount,
-            .distanceWalkingRunning,
-            .distanceCycling,
-            .distanceWheelchair,
-            .basalEnergyBurned,
-            .activeEnergyBurned,
-            .flightsClimbed,
-            .nikeFuel,
-            .appleExerciseTime,
-            .pushCount,
-            .distanceSwimming,
-            .swimmingStrokeCount,
-            .vo2Max,
+            //            .distanceWalkingRunning,
+            //            .distanceCycling,
+            //            .distanceWheelchair,
+            //            .basalEnergyBurned,
+            //            .activeEnergyBurned,
+            //            .flightsClimbed,
+            //            .nikeFuel,
+//            .appleExerciseTime,
+            //            .pushCount,
+            //            .distanceSwimming,
+            //            .swimmingStrokeCount,
+            //            .vo2Max,
             .heartRate,
-            .bodyTemperature,
-            .basalBodyTemperature,
-            .bloodPressureSystolic,
-            .bloodPressureDiastolic,
-            .respiratoryRate,
-            .restingHeartRate,
-            .walkingHeartRateAverage,
-            .heartRateVariabilitySDNN,
-            .oxygenSaturation,
-            .peripheralPerfusionIndex,
-            .bloodGlucose,
-            .numberOfTimesFallen,
-            .electrodermalActivity,
-            .inhalerUsage,
-            .insulinDelivery,
-            .bloodAlcoholContent,
-            .forcedVitalCapacity,
-            .forcedExpiratoryVolume1,
-            .peakExpiratoryFlowRate,
-            .dietaryFatTotal,
-            .dietaryFatPolyunsaturated,
-            .dietaryFatMonounsaturated,
-            .dietaryFatSaturated,
-            .dietaryCholesterol,
-            .dietarySodium,
-            .dietaryCarbohydrates,
-            .dietaryFiber,
-            .dietarySugar,
-            .dietaryEnergyConsumed,
-            .dietaryProtein,
-            .dietaryVitaminA,
-            .dietaryVitaminB6,
-            .dietaryVitaminB12,
-            .dietaryVitaminC,
-            .dietaryVitaminD,
-            .dietaryVitaminE,
-            .dietaryVitaminK,
-            .dietaryCalcium,
-            .dietaryIron,
-            .dietaryThiamin,
-            .dietaryRiboflavin,
-            .dietaryNiacin,
-            .dietaryFolate,
-            .dietaryBiotin,
-            .dietaryPantothenicAcid,
-            .dietaryPhosphorus,
-            .dietaryIodine,
-            .dietaryMagnesium,
-            .dietaryZinc,
-            .dietarySelenium,
-            .dietaryCopper,
-            .dietaryManganese,
-            .dietaryChromium,
-            .dietaryMolybdenum,
-            .dietaryChloride,
-            .dietaryPotassium,
-            .dietaryCaffeine,
-            .dietaryWater,
-            .uvExposure,
+            //            .bodyTemperature,
+            //            .basalBodyTemperature,
+            //            .bloodPressureSystolic,
+            //            .bloodPressureDiastolic,
+            //            .respiratoryRate,
+            //            .restingHeartRate,
+            //            .walkingHeartRateAverage,
+            //            .heartRateVariabilitySDNN,
+            //            .oxygenSaturation,
+            //            .peripheralPerfusionIndex,
+            //            .bloodGlucose,
+            //            .numberOfTimesFallen,
+            //            .electrodermalActivity,
+            //            .inhalerUsage,
+            //            .insulinDelivery,
+            //            .bloodAlcoholContent,
+            //            .forcedVitalCapacity,
+            //            .forcedExpiratoryVolume1,
+            //            .peakExpiratoryFlowRate,
+            //            .dietaryFatTotal,
+            //            .dietaryFatPolyunsaturated,
+            //            .dietaryFatMonounsaturated,
+            //            .dietaryFatSaturated,
+            //            .dietaryCholesterol,
+            //            .dietarySodium,
+            //            .dietaryCarbohydrates,
+            //            .dietaryFiber,
+            //            .dietarySugar,
+            //            .dietaryEnergyConsumed,
+            //            .dietaryProtein,
+            //            .dietaryVitaminA,
+            //            .dietaryVitaminB6,
+            //            .dietaryVitaminB12,
+            //            .dietaryVitaminC,
+            //            .dietaryVitaminD,
+            //            .dietaryVitaminE,
+            //            .dietaryVitaminK,
+            //            .dietaryCalcium,
+            //            .dietaryIron,
+            //            .dietaryThiamin,
+            //            .dietaryRiboflavin,
+            //            .dietaryNiacin,
+            //            .dietaryFolate,
+            //            .dietaryBiotin,
+            //            .dietaryPantothenicAcid,
+            //            .dietaryPhosphorus,
+            //            .dietaryIodine,
+            //            .dietaryMagnesium,
+            //            .dietaryZinc,
+            //            .dietarySelenium,
+            //            .dietaryCopper,
+            //            .dietaryManganese,
+            //            .dietaryChromium,
+            //            .dietaryMolybdenum,
+            //            .dietaryChloride,
+            //            .dietaryPotassium,
+            //            .dietaryCaffeine,
+            //            .dietaryWater,
+            //            .uvExposure,
         ]
     }
     private func getAllWriteQuantityTypeIdentifiers() -> [HKQuantityTypeIdentifier] {
         var allWriteQuantityIdentifiers = getAllReadQuantityTypeIdentifiers()
-        allWriteQuantityIdentifiers.remove(at: allWriteQuantityIdentifiers.index(of: HKQuantityTypeIdentifier.nikeFuel)!)
-        allWriteQuantityIdentifiers.remove(at: allWriteQuantityIdentifiers.index(of: HKQuantityTypeIdentifier.appleExerciseTime)!)
+        //        allWriteQuantityIdentifiers.remove(at: allWriteQuantityIdentifiers.index(of: HKQuantityTypeIdentifier.nikeFuel)!)
 //        allWriteQuantityIdentifiers.remove(at: allWriteQuantityIdentifiers.index(of: HKQuantityTypeIdentifier.appleExerciseTime)!)
-        allWriteQuantityIdentifiers.remove(at: allWriteQuantityIdentifiers.index(of: HKQuantityTypeIdentifier.walkingHeartRateAverage)!)
+        //        allWriteQuantityIdentifiers.remove(at: allWriteQuantityIdentifiers.index(of: HKQuantityTypeIdentifier.appleExerciseTime)!)
+        //        allWriteQuantityIdentifiers.remove(at: allWriteQuantityIdentifiers.index(of: HKQuantityTypeIdentifier.walkingHeartRateAverage)!)
         return allWriteQuantityIdentifiers
         
     }
@@ -108,25 +108,25 @@ extension HealthKtiManager{
         
         return [
             .sleepAnalysis,
-            .appleStandHour,
-            .cervicalMucusQuality,
-            .ovulationTestResult,
-            .menstrualFlow,
-            .intermenstrualBleeding,
-            .sexualActivity,
-            .mindfulSession,
+            //            .appleStandHour,
+            //            .cervicalMucusQuality,
+            //            .ovulationTestResult,
+            //            .menstrualFlow,
+            //            .intermenstrualBleeding,
+            //            .sexualActivity,
+            //            .mindfulSession,
         ]
     }
     private func getAllWriteCategoryIdentifiers()->[HKCategoryTypeIdentifier]{
         
         var allWriteCategoryIdentifiers = getAllReadCategoryIdentifiers()
-        allWriteCategoryIdentifiers.remove(at: allWriteCategoryIdentifiers.index(of: HKCategoryTypeIdentifier.appleStandHour)!)
+        //        allWriteCategoryIdentifiers.remove(at: allWriteCategoryIdentifiers.index(of: HKCategoryTypeIdentifier.appleStandHour)!)
         return allWriteCategoryIdentifiers
     }
     private func getAllReadCorrelationIdentifiers()->[HKCorrelationTypeIdentifier]{
         return [
-//            .bloodPressure,
-//            .food,
+            //            .bloodPressure,
+            //            .food,
         ]
     }
     private func getAllWriteCorrelationIdentifiers()->[HKCorrelationTypeIdentifier]{
@@ -134,16 +134,20 @@ extension HealthKtiManager{
         return allWriteCorrelationIdentifiers
     }
     private func getDocumentTypeIdentifiers()->[HKDocumentTypeIdentifier]{
-        return [.CDA]
+        return [
+            //            .CDA
+        ]
     }
     private func getWorkoutTypeIdentifier()->[String]{
-        return [HKWorkoutTypeIdentifier]
+        return [
+            HKWorkoutTypeIdentifier
+        ]
     }
     /*
-    func getWorkoutRouteTypeIdentifier() -> [String]{
-        return [HKWorkoutRouteTypeIdentifier]
-    }
-    */
+     func getWorkoutRouteTypeIdentifier() -> [String]{
+     return [HKWorkoutRouteTypeIdentifier]
+     }
+     */
     
     func getAllReadDataTypes() -> [HKObjectType] {
         var arrayofDataTypes = [HKObjectType]()

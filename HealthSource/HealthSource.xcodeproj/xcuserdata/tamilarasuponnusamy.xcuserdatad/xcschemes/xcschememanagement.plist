@@ -4,10 +4,73 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>HealthSource.xcscheme</key>
+		<key>Copy Healthdata.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>CopyHealthData.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>HealthSource-Adhoc.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>HealthSource-Release.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>HealthSource.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>SqliteCopy.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>SqliteFileExtension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>shareExtension-Release.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>shareExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>C66419AF20175DF000EFB204</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C6B7854C1F79739800BB33E9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C6B785631F79739800BB33E9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C6B7856E1F79739800BB33E9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
