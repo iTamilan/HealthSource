@@ -6,5 +6,5 @@
 //  Copyright © 2018 Tamilarasu Ponnusamy. All rights reserved.
 //
 
-public let zipPassword = "<SHARED ZIP File PASSWORD>"
+public let zipPassword = "Tamilanda!"
 public let dropboxAppKey = "<Dropbox APP KEY>"

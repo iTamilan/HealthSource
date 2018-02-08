@@ -1,0 +1,26 @@
+PODS:
+  - Alamofire (4.5.1)
+  - NVActivityIndicatorView (4.1.1):
+    - NVActivityIndicatorView/Presenter (= 4.1.1)
+  - NVActivityIndicatorView/Presenter (4.1.1)
+  - ReachabilitySwift (4.1.0)
+  - SSZipArchive (2.1.1)
+  - SwiftyDropbox (4.3.0):
+    - Alamofire (~> 4.5.0)
+
+DEPENDENCIES:
+  - NVActivityIndicatorView (~> 4.1)
+  - ReachabilitySwift (~> 4.1)
+  - SSZipArchive (~> 2.1)
+  - SwiftyDropbox (~> 4.3)
+
+SPEC CHECKSUMS:
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  NVActivityIndicatorView: 60109b9bf46efc2e71ab81453196ccdfdfeea870
+  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
+  SSZipArchive: 14401ade5f8e82aba1ff03e9f88e9de60937ae60
+  SwiftyDropbox: f70ff647c8ef4195e1314c8a894652f3ba3da526
+
+PODFILE CHECKSUM: d46d2dda1fe43a3f213aea34ea8f3ad99c894d79
+
+COCOAPODS: 1.4.0

@@ -9,14 +9,13 @@
 import UIKit
 import HealthKit
 import CoreData
-var dayLimitForCopy = 1
-var sampleCount:Int = -1
+fileprivate var sampleCount:Int = -1
 class HealthKtiManager: NSObject {
     public static let shared = HealthKtiManager()
     let store:HKHealthStore
     let operationQueue:OperationQueue
     var fetchedObject = [HKSample]()
-    var fetchedCount = 0;
+    var fetchedCount = -1;
     override init() {
         self.store = HKHealthStore.init()
         self.operationQueue = OperationQueue.init()
@@ -31,25 +30,39 @@ class HealthKtiManager: NSObject {
             completion(completed,error)
         }
     }
-    public func fetchAllHealthData(completion: @escaping (Bool, Error?) -> Swift.Void){
+    public func fetchAllHealthData(completion: @escaping (Bool, [HKSample]?, Error?) -> Swift.Void){
+        let startDate = dateRange.fromDate
+        let endDate = dateRange.toDate
+//        let anchorQueryDict = HSUserDefaults.shared.getHKAnchorQueryDictionary()
+        fetchAllHealthData(startDate: startDate, endDate: endDate, anchorQueryDict: nil) { (success, queryDict,hksamples, error) in
+            completion(success,hksamples,error)
+        }
         
+    }
+    public func fetchAllHealthData(startDate:Date,endDate:Date, anchorQueryDict:HSQueryAnchorDictionay?, completion: @escaping (Bool, HSQueryAnchorDictionay?, [HKSample]?, Error?) -> Swift.Void){
         self.getPermissions { (completed, error) in
             guard error == nil else {
                 
                 let error = NSError(domain:"com.app.error", code:-007, userInfo:[NSLocalizedDescriptionKey:"Error while asking permission"])
                 print("Error while asking permission")
-                completion(false, error)
+                completion(false, nil , nil,error)
+                return
+            }
+            guard self.fetchedCount == -1 else{
+                let error = NSError(domain:"com.app.error.inprogress", code:-008, userInfo:[NSLocalizedDescriptionKey:"Already data fetching"])
+                print("AHK Fetching already in progress")
+                completion(false, nil, nil, error)
                 return
             }
             self.fetchedObject = [HKSample]()
             self.fetchedCount = 0;
             let allReadDataType = self.getAllReadDataTypes()
-            let startDate = Calendar.current.date(byAdding: .day, value: -dayLimitForCopy, to: Date())!
-            let predicte = HKQuery.predicateForSamples(withStart: startDate, end: Date(), options: HKQueryOptions.strictStartDate)
+            let predicte = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: HKQueryOptions.strictStartDate)
+            var updateAnchorQueryDict = anchorQueryDict
             if allReadDataType.count > 0 {
                 for hkObjectType in allReadDataType{
                     
-                    let query = HKAnchoredObjectQuery.init(type: hkObjectType as! HKSampleType, predicate: predicte, anchor: nil, limit: HKObjectQueryNoLimit, resultsHandler: { (anchorQueryobject, sample, hkDeletedObject, anchorQuery, error) in
+                    let query = HKAnchoredObjectQuery.init(type: hkObjectType as! HKSampleType, predicate: predicte, anchor: updateAnchorQueryDict?[hkObjectType.identifier], limit: HKObjectQueryNoLimit, resultsHandler: { (anchorQueryobject, sample, hkDeletedObject, anchorQuery, error) in
                         self.operationQueue.addOperation {
                             self.fetchedCount += 1;
                             print("Current Fetched data type \(hkObjectType.identifier)")
@@ -57,7 +70,9 @@ class HealthKtiManager: NSObject {
                                 self.fetchedObject.append(contentsOf: samples)
                                 print("Current Fetched data type object Count  \(samples.count)")
                             }
-                            
+                            if error == nil {
+                                updateAnchorQueryDict?[hkObjectType.identifier] = anchorQuery
+                            }
                             print("Total Fetched count \(self.fetchedCount)");
                             print("Total Fetched object count \(self.fetchedObject.count)");
                             print("-------------------------------")
@@ -65,100 +80,50 @@ class HealthKtiManager: NSObject {
                             if self.fetchedCount == allReadDataType.count {
                                 print("Total Fetched data types \(self.fetchedCount)");
                                 print("Total fetched objects \(self.fetchedObject.count)");
-                                self.saveAllFetchedObjectsInCoreData()
-                                completion(true, nil)
+                                self.fetchedCount = -1
+                                completion(true, updateAnchorQueryDict,self.fetchedObject,nil)
                             }
                         }
                     })
                     self.store.execute(query);
                 }
             }else {
-                completion(true, nil)
+                self.fetchedCount = -1
+                completion(true,updateAnchorQueryDict,nil,nil)
             }
         }
     }
-    public func unwrapTheObjects(){
-        //        UserDefaults.standard.set(dataObject, forKey: "FetchedObjects");
-        let data:Any? = UserDefaults.standard.object(forKey: "FetchedObjects")
-        if data is Data {
-            let dataObjects = NSKeyedUnarchiver.unarchiveObject(with: data as! Data)
-            print(dataObjects ?? "Nothing")
-        }
-    }
-    public func saveAllFetchedObjectsInCoreData(){
-        DispatchQueue.main.async {
-            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                print("No app delegate")
-                return
-            }
-            let managedObjectContext = appDelegate.localPersistentContainer.viewContext
-            for sample in self.fetchedObject {
-                if(sample.sourceRevision.source.bundleIdentifier == Bundle.main.bundleIdentifier){
-                    continue
-                }
-                let metadata = sample.metadata
-                if let metaData = metadata {
-                    if let userEntered = (metaData[HKMetadataKeyWasUserEntered] as? Bool), userEntered == true {
-                        continue
-                    }
-                }
-                let entity = NSEntityDescription.entity(forEntityName: "DBT_HSSample", in: managedObjectContext)
-                let hkSample:DBT_HSSample = NSManagedObject(entity: entity!, insertInto: managedObjectContext) as! DBT_HSSample
-                hkSample.identifier = sample.sampleType.identifier
-                hkSample.data = sample
-            }
-            appDelegate.localSaveContext()
-            print("\n\n------Copied all the data----\n\n")
-        }
-    }
-    public func getUnknownFetchedObjectsInCoreData() -> [DBT_HSSample]{
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            print("No app delegate")
-            return []
-        }
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>.init(entityName: "DBT_HSSample")
-        var dbtHKSamples:[DBT_HSSample] = []
-        do{
-            let managedObjectContext = appDelegate.unknownPersistentContainer.viewContext
-            
-            let fetchResults:[DBT_HSSample]  = try managedObjectContext.fetch(fetchRequest) as! [DBT_HSSample]
-            dbtHKSamples.append(contentsOf: fetchResults)
-        }catch let error {
-            print("Error while executing the data + \(error)")
-        }
-        return dbtHKSamples
-    }
-    public func writeUnknownDatebaseToHealthKit(completion: @escaping (Bool, [Error]) -> Swift.Void){
+   
+    public func writeToHealthKit(hkSamples:[HKSample],completion: @escaping (Bool, [Error]) -> Swift.Void){
         self.getPermissions { (completed, error) in
             if let perError = error {
                 completion(false,[perError])
                 return
             }
             DispatchQueue.main.async {
-                let dbtHSSamples = self.getUnknownFetchedObjectsInCoreData()
-                //                var hksamples:[HKSample] = []
+               
                 var hkSaveErrors:[Error] = []
                 guard sampleCount == -1 else {
                     let error = NSError(domain: "self eroror", code: -007, userInfo: [NSLocalizedDescriptionKey : "Already writing going on"])
                     completion(false,[error])
                     return
                 }
-                sampleCount = dbtHSSamples.count
+                sampleCount = hkSamples.count
                 if sampleCount>0 {
-                for dbtHSSample in dbtHSSamples {
-                    var hksample: HKSample? =  dbtHSSample.data as? HKSample
-                    let identifier =  dbtHSSample.identifier
-                    //                    hksamples.append(hksample)
+                    for hkSample in hkSamples {
+                    
+                    let identifier =  hkSample.sampleType.identifier
+                    
                     if(identifier == HKQuantityTypeIdentifier.appleExerciseTime.rawValue){
                         sampleCount = sampleCount - 1
                         if(sampleCount == 0){
+                            sampleCount = -1
                              completion(true,hkSaveErrors)
                         }
                         continue
                     }
-                    hksample = self.getNewSampleFromSample(oldSample: hksample)
                     
-                    if let saveSample = hksample {
+                    if let saveSample = self.getNewSampleFromSample(oldSample: hkSample) {
                         print("Identifier \(String(describing: identifier)) HKSample \(saveSample)")
                         self.store.save(saveSample, withCompletion: { (saved, error) in
                             if error != nil {
@@ -166,19 +131,16 @@ class HealthKtiManager: NSObject {
                                 print("Error while saving the unkown healthData \(String(describing: error))")
                                 sampleCount = sampleCount - 1
                                 if(sampleCount == 0){
+                                    sampleCount = -1
                                     completion(true,hkSaveErrors)
                                 }
 
                             }else {
                                 OperationQueue.main.addOperation {
-                                    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                                        print("No app delegate")
-                                        return
-                                    }
-                                    let managedObjectContext = appDelegate.unknownPersistentContainer.viewContext
-                                    managedObjectContext.delete(dbtHSSample)
+                                   
                                     sampleCount = sampleCount - 1
                                     if(sampleCount == 0){
+                                        sampleCount = -1
                                         completion(true,hkSaveErrors)
                                     }
                                 }
@@ -187,11 +149,13 @@ class HealthKtiManager: NSObject {
                     }else{
                         sampleCount = sampleCount - 1
                         if(sampleCount == 0){
+                            sampleCount = -1
                             completion(true,hkSaveErrors)
                         }
                     }
                 }
                 }else{
+                    sampleCount = -1
                 completion(true,hkSaveErrors)
                 }
             }

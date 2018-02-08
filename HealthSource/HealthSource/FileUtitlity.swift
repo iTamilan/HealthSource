@@ -67,6 +67,13 @@ class FileUtitlity: NSObject {
         return FileUtitlity.getDocumentsDirectory() + "/newhealthData.zip"
     }
     
+    public static func getDocumentryLocalDataFilePath() ->String {
+        return FileUtitlity.getDocumentsDirectory() + "/localHealthData.jpg"
+    }
+    
+    public static func getDocumentryUnknownDataFilePath() ->String {
+        return FileUtitlity.getDocumentsDirectory() + "/unknownHealthData.jpg"
+    }
     //MARK:-Group Container
     
     public static func getGroupSharedContainerPath() -> String? {
@@ -83,17 +90,8 @@ class FileUtitlity: NSObject {
         
         return (FileUtitlity.getGroupSharedContainerPath() ?? "") + "/healthData.zip"
     }
-    
-    //MARK: - Alert
-    
-    public static func showSimpleAlert(_ title:String?, message: String?, viewController:UIViewController?){
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: "Dismiss", style: .cancel) { _ in
-        }
-        alert.addAction(action)
-        viewController?.present(alert, animated: true, completion: nil)
+
+    public static func getGroupShareUnknownDataFilePath() ->String {
+        return (FileUtitlity.getGroupSharedContainerPath() ?? "") + "/unknownHealthData.jpg"
     }
-    
-    
 }

@@ -13,7 +13,7 @@ class ShareViewController: SLComposeServiceViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let content = extensionContext!.inputItems[0] as! NSExtensionItem
-        let contentType = "public.data"
+        let contentType = "public.image"
         var isValidContext = false
         for attachment in content.attachments as! [NSItemProvider] {
             if attachment.hasItemConformingToTypeIdentifier(contentType) {
@@ -68,7 +68,7 @@ class ShareViewController: SLComposeServiceViewController {
                 attachment.loadDataRepresentation(forTypeIdentifier: contentType, completionHandler: { (data, error) in
                     if error == nil {
                         var copied  = false
-                        let pasteSqliteURLPath = FileUtitlity.getGroupShareUnknowZipPath()
+                        let pasteSqliteURLPath = FileUtitlity.getGroupShareUnknownDataFilePath()
                         //                let pasteSqliteURL = URL(fileURLWithPath: pasteSqliteURLPath)
                         if( FileManager.default.fileExists(atPath: pasteSqliteURLPath)){
                             do {
@@ -83,11 +83,11 @@ class ShareViewController: SLComposeServiceViewController {
                                 copied = true
                             } catch let error{
                                 print("Error while writing the data \(error)")
-                                FileUtitlity.showSimpleAlert("Error", message: "Error while writing the data \(error)", viewController: self)
+                                UIAlertController.showSimpleAlert("Error", message: "Error while writing the data \(error)", viewController: self)
                             }
                         }
                         if !copied {
-                            FileUtitlity.showSimpleAlert("Error", message: "Its not an string", viewController: self)
+                            UIAlertController.showSimpleAlert("Error", message: "Its not an string", viewController: self)
                         }else{
 //                            exit(0)
                         }
@@ -106,7 +106,7 @@ class ShareViewController: SLComposeServiceViewController {
                 attachment.loadFileRepresentation(forTypeIdentifier: contentTypeURL, completionHandler: { (contentURL, error) in
                     if error == nil {
                         var copied  = false
-                        let pasteSqliteURLPath = FileUtitlity.getGroupShareUnknowZipPath()
+                        let pasteSqliteURLPath = FileUtitlity.getGroupShareUnknownDataFilePath()
                         //                let pasteSqliteURL = URL(fileURLWithPath: pasteSqliteURLPath)
                         if( FileManager.default.fileExists(atPath: pasteSqliteURLPath)){
                             do {
@@ -131,11 +131,11 @@ class ShareViewController: SLComposeServiceViewController {
                                 copied = true
                             } catch let error{
                                 print("Error while writing the data \(error)")
-                                FileUtitlity.showSimpleAlert("Error", message: "Error while writing the data \(error)", viewController: self)
+                                UIAlertController.showSimpleAlert("Error", message: "Error while writing the data \(error)", viewController: self)
                             }
                         }
                         if !copied {
-                            FileUtitlity.showSimpleAlert("Error", message: "Its not an string", viewController: self)
+                            UIAlertController.showSimpleAlert("Error", message: "Its not an string", viewController: self)
                         }else{
                             //                            exit(0)
                         }
@@ -212,17 +212,17 @@ class ShareViewController: SLComposeServiceViewController {
         return path
     }
     
-    public static func getDocumentsDirectorySqlitePath() -> String {
-        
-        return ShareViewController.getDocumentsDirectory() + "/HealthSource.sqlite"
-    }
-    
-    public static func getApplicationSupportDirectoryUnknowSqlitePath() -> String {
-        
-        return ShareViewController.getDocumentsDirectory() + "/UnknownHealthSource.sqlite"
-    }
-    
-    public static func getApplicationSupportDirectorySqlitePath() -> String {
-        return ShareViewController.getApplicationSupportDirectory() + "/HealthSource.sqlite"
-    }
+//    public static func getDocumentsDirectorySqlitePath() -> String {
+//        
+//        return ShareViewController.getDocumentsDirectory() + "/HealthSource.sqlite"
+//    }
+//    
+//    public static func getApplicationSupportDirectoryUnknowSqlitePath() -> String {
+//        
+//        return ShareViewController.getDocumentsDirectory() + "/UnknownHealthSource.sqlite"
+//    }
+//    
+//    public static func getApplicationSupportDirectorySqlitePath() -> String {
+//        return ShareViewController.getApplicationSupportDirectory() + "/HealthSource.sqlite"
+//    }
 }

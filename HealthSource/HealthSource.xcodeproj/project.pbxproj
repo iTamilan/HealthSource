@@ -17,13 +17,15 @@
 		C61CBF922021E8F200CD75F1 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61CBF902021E8F200CD75F1 /* Configuration.swift */; };
 		C61CBF932021E8F200CD75F1 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61CBF902021E8F200CD75F1 /* Configuration.swift */; };
 		C61CBF942021E8F200CD75F1 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61CBF902021E8F200CD75F1 /* Configuration.swift */; };
+		C62687A020313BB200B18AC8 /* HSAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C626879F20313BB200B18AC8 /* HSAlert.swift */; };
+		C62687A120313BB200B18AC8 /* HSAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C626879F20313BB200B18AC8 /* HSAlert.swift */; };
 		C659303720186DC3004FAF92 /* FileUtitlity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C659303620186DC3004FAF92 /* FileUtitlity.swift */; };
 		C659303820186DC3004FAF92 /* FileUtitlity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C659303620186DC3004FAF92 /* FileUtitlity.swift */; };
 		C66419B320175DF000EFB204 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66419B220175DF000EFB204 /* ShareViewController.swift */; };
 		C66419B620175DF000EFB204 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C66419B420175DF000EFB204 /* MainInterface.storyboard */; };
 		C66419BA20175DF000EFB204 /* shareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C66419B020175DF000EFB204 /* shareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C6780F60202F2E730072B7D0 /* HSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6780F5F202F2E730072B7D0 /* HSViewController.swift */; };
 		C6B785511F79739800BB33E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B785501F79739800BB33E9 /* AppDelegate.swift */; };
-		C6B785531F79739800BB33E9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B785521F79739800BB33E9 /* ViewController.swift */; };
 		C6B785561F79739800BB33E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6B785541F79739800BB33E9 /* Main.storyboard */; };
 		C6B785591F79739800BB33E9 /* HealthSource.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C6B785571F79739800BB33E9 /* HealthSource.xcdatamodeld */; };
 		C6B7855B1F79739800BB33E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6B7855A1F79739800BB33E9 /* Assets.xcassets */; };
@@ -31,6 +33,21 @@
 		C6B785691F79739800BB33E9 /* HealthSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B785681F79739800BB33E9 /* HealthSourceTests.swift */; };
 		C6B785741F79739800BB33E9 /* HealthSourceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B785731F79739800BB33E9 /* HealthSourceUITests.swift */; };
 		C6B8C22D202BE4CB00C6F5D4 /* DropBoxManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B8C22C202BE4CB00C6F5D4 /* DropBoxManager.swift */; };
+		C6C9FE5B2030835300A0AD94 /* HSAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C9FE5A2030835300A0AD94 /* HSAppManager.swift */; };
+		C6C9FE5E203084D200A0AD94 /* HSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C9FE5D203084D200A0AD94 /* HSUserDefaults.swift */; };
+		C6C9FE6120308A2800A0AD94 /* HSQueryAnchoreDicionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C9FE6020308A2800A0AD94 /* HSQueryAnchoreDicionary.swift */; };
+		C6C9FE64203097D700A0AD94 /* HSPersistentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C9FE63203097D700A0AD94 /* HSPersistentStore.swift */; };
+		C6F1785B202ED04F000E9275 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F1785A202ED04F000E9275 /* HomeViewController.swift */; };
+		C6F1785F202EDFF1000E9275 /* HSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F1785E202EDFF1000E9275 /* HSDate.swift */; };
+		C6F17860202EDFF1000E9275 /* HSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F1785E202EDFF1000E9275 /* HSDate.swift */; };
+		C6F17862202EF37B000E9275 /* HSDateRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F17861202EF37B000E9275 /* HSDateRange.swift */; };
+		C6F17863202EF37B000E9275 /* HSDateRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F17861202EF37B000E9275 /* HSDateRange.swift */; };
+		C6F17866202EFA4D000E9275 /* DateRangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F17865202EFA4D000E9275 /* DateRangeViewController.swift */; };
+		C6F17867202EFA4D000E9275 /* DateRangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F17865202EFA4D000E9275 /* DateRangeViewController.swift */; };
+		C6F17870202EFD85000E9275 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F1786E202EFD85000E9275 /* DatePickerTableViewCell.swift */; };
+		C6F17871202EFD85000E9275 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F1786E202EFD85000E9275 /* DatePickerTableViewCell.swift */; };
+		C6F17872202EFD85000E9275 /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F1786F202EFD85000E9275 /* PickerTableViewCell.swift */; };
+		C6F17873202EFD85000E9275 /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F1786F202EFD85000E9275 /* PickerTableViewCell.swift */; };
 		CF63F0A9038DF69B58AA45AA /* Pods_shareExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47970E880A678745053F7215 /* Pods_shareExtension.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,16 +104,17 @@
 		C61BAEB41F8149EF00593580 /* HealthSource.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthSource.entitlements; sourceTree = "<group>"; };
 		C61BAEB61F8149EF00593580 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		C61CBF902021E8F200CD75F1 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		C626879F20313BB200B18AC8 /* HSAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSAlert.swift; sourceTree = "<group>"; };
 		C659303620186DC3004FAF92 /* FileUtitlity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtitlity.swift; sourceTree = "<group>"; };
 		C66419B020175DF000EFB204 /* shareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = shareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C66419B220175DF000EFB204 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		C66419B520175DF000EFB204 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		C66419B720175DF000EFB204 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C66419BE20175DFE00EFB204 /* shareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = shareExtension.entitlements; sourceTree = "<group>"; };
+		C6780F5F202F2E730072B7D0 /* HSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSViewController.swift; sourceTree = "<group>"; };
 		C696D592C97558268DAEC6A5 /* Pods_HealthSourceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HealthSourceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6B7854D1F79739800BB33E9 /* HealthSource.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthSource.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6B785501F79739800BB33E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C6B785521F79739800BB33E9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C6B785551F79739800BB33E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C6B785581F79739800BB33E9 /* HealthSource.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HealthSource.xcdatamodel; sourceTree = "<group>"; };
 		C6B7855A1F79739800BB33E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -109,6 +127,16 @@
 		C6B785731F79739800BB33E9 /* HealthSourceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthSourceUITests.swift; sourceTree = "<group>"; };
 		C6B785751F79739800BB33E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6B8C22C202BE4CB00C6F5D4 /* DropBoxManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropBoxManager.swift; sourceTree = "<group>"; };
+		C6C9FE5A2030835300A0AD94 /* HSAppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSAppManager.swift; sourceTree = "<group>"; };
+		C6C9FE5D203084D200A0AD94 /* HSUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSUserDefaults.swift; sourceTree = "<group>"; };
+		C6C9FE6020308A2800A0AD94 /* HSQueryAnchoreDicionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSQueryAnchoreDicionary.swift; sourceTree = "<group>"; };
+		C6C9FE63203097D700A0AD94 /* HSPersistentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSPersistentStore.swift; sourceTree = "<group>"; };
+		C6F1785A202ED04F000E9275 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		C6F1785E202EDFF1000E9275 /* HSDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSDate.swift; sourceTree = "<group>"; };
+		C6F17861202EF37B000E9275 /* HSDateRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSDateRange.swift; sourceTree = "<group>"; };
+		C6F17865202EFA4D000E9275 /* DateRangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRangeViewController.swift; sourceTree = "<group>"; };
+		C6F1786E202EFD85000E9275 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
+		C6F1786F202EFD85000E9275 /* PickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
 		CFAF851D2D3F2A7C2AB6414D /* Pods-HealthSourceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthSourceTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HealthSourceTests/Pods-HealthSourceTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F233B39594F075075E066164 /* Pods_HealthSource.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HealthSource.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -208,14 +236,15 @@
 		C6B7854F1F79739800BB33E9 /* HealthSource */ = {
 			isa = PBXGroup;
 			children = (
+				C6F17864202EFA2C000E9275 /* DateRange */,
+				C6F1785D202EDFC3000E9275 /* Common */,
 				C6B8C22B202BE49D00C6F5D4 /* DropboxHandler */,
 				C61CBF8F2021E8D600CD75F1 /* configuration */,
 				C61BAEB41F8149EF00593580 /* HealthSource.entitlements */,
 				C6B785501F79739800BB33E9 /* AppDelegate.swift */,
 				C659303620186DC3004FAF92 /* FileUtitlity.swift */,
-				C6B785521F79739800BB33E9 /* ViewController.swift */,
-				C61BAEAE1F81280800593580 /* HealthKtiManager.swift */,
-				C61BAEB01F81348400593580 /* HealthKitManger+AllDataTypes.swift */,
+				C6F17859202ED04F000E9275 /* Home */,
+				C6F17858202ED01E000E9275 /* HealthKitManager */,
 				C6B785541F79739800BB33E9 /* Main.storyboard */,
 				C6B7855A1F79739800BB33E9 /* Assets.xcassets */,
 				C6B7855C1F79739800BB33E9 /* LaunchScreen.storyboard */,
@@ -249,6 +278,48 @@
 				C6B8C22C202BE4CB00C6F5D4 /* DropBoxManager.swift */,
 			);
 			path = DropboxHandler;
+			sourceTree = "<group>";
+		};
+		C6F17858202ED01E000E9275 /* HealthKitManager */ = {
+			isa = PBXGroup;
+			children = (
+				C61BAEAE1F81280800593580 /* HealthKtiManager.swift */,
+				C61BAEB01F81348400593580 /* HealthKitManger+AllDataTypes.swift */,
+			);
+			path = HealthKitManager;
+			sourceTree = "<group>";
+		};
+		C6F17859202ED04F000E9275 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				C6F1785A202ED04F000E9275 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		C6F1785D202EDFC3000E9275 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C6F1785E202EDFF1000E9275 /* HSDate.swift */,
+				C626879F20313BB200B18AC8 /* HSAlert.swift */,
+				C6C9FE63203097D700A0AD94 /* HSPersistentStore.swift */,
+				C6F17861202EF37B000E9275 /* HSDateRange.swift */,
+				C6780F5F202F2E730072B7D0 /* HSViewController.swift */,
+				C6C9FE5A2030835300A0AD94 /* HSAppManager.swift */,
+				C6C9FE5D203084D200A0AD94 /* HSUserDefaults.swift */,
+				C6C9FE6020308A2800A0AD94 /* HSQueryAnchoreDicionary.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		C6F17864202EFA2C000E9275 /* DateRange */ = {
+			isa = PBXGroup;
+			children = (
+				C6F17865202EFA4D000E9275 /* DateRangeViewController.swift */,
+				C6F1786E202EFD85000E9275 /* DatePickerTableViewCell.swift */,
+				C6F1786F202EFD85000E9275 /* PickerTableViewCell.swift */,
+			);
+			path = DateRange;
 			sourceTree = "<group>";
 		};
 		ED1C7BD808B7513F76A3CB0E /* Pods */ = {
@@ -360,7 +431,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0900;
-				ORGANIZATIONNAME = "Tamilarasu Ponnusamy";
+				ORGANIZATIONNAME = Tamilarasu;
 				TargetAttributes = {
 					C66419AF20175DF000EFB204 = {
 						CreatedOnToolsVersion = 9.2;
@@ -647,8 +718,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6F17863202EF37B000E9275 /* HSDateRange.swift in Sources */,
+				C62687A120313BB200B18AC8 /* HSAlert.swift in Sources */,
+				C6F17860202EDFF1000E9275 /* HSDate.swift in Sources */,
+				C6F17867202EFA4D000E9275 /* DateRangeViewController.swift in Sources */,
 				C66419B320175DF000EFB204 /* ShareViewController.swift in Sources */,
 				C61CBF942021E8F200CD75F1 /* Configuration.swift in Sources */,
+				C6F17873202EFD85000E9275 /* PickerTableViewCell.swift in Sources */,
+				C6F17871202EFD85000E9275 /* DatePickerTableViewCell.swift in Sources */,
 				C659303820186DC3004FAF92 /* FileUtitlity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -659,11 +736,22 @@
 			files = (
 				C6B785591F79739800BB33E9 /* HealthSource.xcdatamodeld in Sources */,
 				C659303720186DC3004FAF92 /* FileUtitlity.swift in Sources */,
+				C6780F60202F2E730072B7D0 /* HSViewController.swift in Sources */,
+				C6F17866202EFA4D000E9275 /* DateRangeViewController.swift in Sources */,
+				C62687A020313BB200B18AC8 /* HSAlert.swift in Sources */,
+				C6C9FE5E203084D200A0AD94 /* HSUserDefaults.swift in Sources */,
 				C61CBF912021E8F200CD75F1 /* Configuration.swift in Sources */,
+				C6F17862202EF37B000E9275 /* HSDateRange.swift in Sources */,
+				C6C9FE64203097D700A0AD94 /* HSPersistentStore.swift in Sources */,
 				C6B8C22D202BE4CB00C6F5D4 /* DropBoxManager.swift in Sources */,
-				C6B785531F79739800BB33E9 /* ViewController.swift in Sources */,
+				C6F17872202EFD85000E9275 /* PickerTableViewCell.swift in Sources */,
+				C6F1785B202ED04F000E9275 /* HomeViewController.swift in Sources */,
 				C61BAEAF1F81280800593580 /* HealthKtiManager.swift in Sources */,
 				C61BAEB11F81348400593580 /* HealthKitManger+AllDataTypes.swift in Sources */,
+				C6F1785F202EDFF1000E9275 /* HSDate.swift in Sources */,
+				C6C9FE5B2030835300A0AD94 /* HSAppManager.swift in Sources */,
+				C6F17870202EFD85000E9275 /* DatePickerTableViewCell.swift in Sources */,
+				C6C9FE6120308A2800A0AD94 /* HSQueryAnchoreDicionary.swift in Sources */,
 				C6B785511F79739800BB33E9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
