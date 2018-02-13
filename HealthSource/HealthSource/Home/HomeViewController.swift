@@ -29,13 +29,13 @@ fileprivate enum Row{
         case .link:
             return "Link your dropbox"
         case .unlink:
-            return "logout dropbox"
+            return "Logout dropbox"
         case .readUpload:
-            return "Read & Upload"
+            return "Read & upload"
         case .autoUpload:
-            return "Auto Upload"
+            return "Auto upload"
         case .autoUploadOverWifiOnly:
-            return "Auto Upload over WiFi only"
+            return "Auto upload over WiFi only"
         case .createSharedLink:
             return "Create Shared Link"
         case .copyToClipboard:
@@ -49,7 +49,7 @@ fileprivate enum Row{
         case .autoDownload:
             return "Auto Download"
         case .autoDownloadOverWifiOnly:
-            return "Auto Doenload over WiFi only"
+            return "Auto Download over WiFi only"
         case .unfollowLink:
             return "Unfollow Link"
         }
@@ -71,7 +71,7 @@ fileprivate enum Section {
         case .logout:
             return "Logout Dropbox"
         case .readUpload:
-            return "Read & Upload HealthKitData"
+            return "Read & upload HealthKitData"
         case .share:
             return "Share"
         case .follow:
@@ -86,11 +86,11 @@ fileprivate enum Section {
     func footerTitle() -> String {
         switch self {
         case .login:
-            return "Link your \"DROPBOX\" to share your Health Date through dropbox."
+            return "Link your \"DROPBOX\" to share your Health Data through dropbox."
         case .logout:
-            return "This will stop uploading your HealthDate to Dropbox"
+            return "This will stop uploading your HealthData to Dropbox"
         case .readUpload:
-            return "It will read the HealthKit data periodically and start uploading data to your dropbox account. By enabling the \"AutoUpload\" will read and upload the HealthData for every 15 min interval. By enabling the \"Auto Upload over WiFi onnly\" will enable the automation upload only over WiFi but read and store locally will happen."
+            return "It will read the HealthKit data periodically and start uploading data to your dropbox account. By enabling the \"AutoUpload\" will read and upload the HealthData for every 15 min interval. By enabling the \"Auto Upload over WiFi onnly\" will enable the automated upload only over WiFi but read and store locally will happen."
         case .share:
             return "By clicking this will generate a sharable link. This link will be used in Follow link sections on another device."
         case .follow:
@@ -142,7 +142,7 @@ class HomeViewController: UIViewController, DateRangeViewControllerDelegate {
                                       .unfollow]
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Health Kit Data Source"
+        self.title = "Dropbox"
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
         // Do any additional setup after loading the view.

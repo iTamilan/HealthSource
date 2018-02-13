@@ -110,7 +110,7 @@ class ShareViewController: UIViewController, DateRangeViewControllerDelegate {
                                       .clearAll]
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Health Kit Data Source"
+        self.title = "Share"
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
         // Do any additional setup after loading the view.
