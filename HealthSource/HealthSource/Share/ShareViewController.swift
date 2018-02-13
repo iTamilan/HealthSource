@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  ShareViewController.swift
 //  HealthSource
 //
 //  Created by Tamilarasu on 10/02/18.
@@ -7,117 +7,89 @@
 //
 
 import UIKit
+import SSZipArchive
 import HealthKit
 
 fileprivate enum Row{
-    case link
-    case unlink
-    case readUpload
-    case autoUpload
-    case autoUploadOverWifiOnly
-    case createSharedLink
-    case copyToClipboard
-    case shareExtension
-    case followLink
-    case downloadWrite
-    case autoDownload
-    case autoDownloadOverWifiOnly
-    case unfollowLink
+    case range
+    case readStoreAction
+    case copyFromClipbord
+    case copyToClipbord
+    case copyFromShare
+    case write
+    case share
+    case clearAll
     
     func title() -> String {
         switch self {
-        case .link:
-            return "Link your dropbox"
-        case .unlink:
-            return "logout dropbox"
-        case .readUpload:
-            return "Read & Upload"
-        case .autoUpload:
-            return "Auto Upload"
-        case .autoUploadOverWifiOnly:
-            return "Auto Upload over WiFi only"
-        case .createSharedLink:
-            return "Create Shared Link"
-        case .copyToClipboard:
-            return "Copy To Clipboard"
-        case .shareExtension:
-            return "Share Link"
-        case .followLink:
-            return "Paste Link"
-        case .downloadWrite:
-            return "Download & Write"
-        case .autoDownload:
-            return "Auto Download"
-        case .autoDownloadOverWifiOnly:
-            return "Auto Doenload over WiFi only"
-        case .unfollowLink:
-            return "Unfollow Link"
+        case .range:
+            return "Range"
+        case .readStoreAction:
+            return "Read & store locally"
+        case .copyToClipbord:
+            return "Copy to Clipboard"
+        case .copyFromClipbord:
+            return "Copy from Clipboard"
+        case .copyFromShare:
+            return "Import from Share extension"
+        case .share:
+            return "Export"
+        case .clearAll:
+            return "Clear all local data & Relaunch"
+        case .write:
+            return "Write to HealthKit"
         }
     }
 }
 
 fileprivate enum Section {
-    case login
-    case logout
-    case readUpload
+    case readStore
+    case copy
+    case write
     case share
-    case follow
-    case downloadWrite
-    case unfollow
+    case clearAll
     func headerTitle() -> String {
         switch self {
-        case .login:
-            return "Link Dropbox"
-        case .logout:
-            return "Logout Dropbox"
-        case .readUpload:
-            return "Read & Upload HealthKitData"
+        case .readStore:
+            return "Read HealthKit data & Store"
+        case .copy:
+            return "Import"
+        case .write:
+            return "Write"
         case .share:
-            return "Share"
-        case .follow:
-            return "Download"
-        case .downloadWrite:
-            return "Download & Add to HealthKitData"
-        case .unfollow:
+            return "Export"
+        case .clearAll:
             return ""
         }
     }
     
     func footerTitle() -> String {
         switch self {
-        case .login:
-            return "Link your \"DROPBOX\" to share your Health Date through dropbox."
-        case .logout:
-            return "This will stop uploading your HealthDate to Dropbox"
-        case .readUpload:
-            return "It will read the HealthKit data periodically and start uploading data to your dropbox account. By enabling the \"AutoUpload\" will read and upload the HealthData for every 15 min interval. By enabling the \"Auto Upload over WiFi onnly\" will enable the automation upload only over WiFi but read and store locally will happen."
+        case .readStore:
+            return "This will read the data in above range from HealthKit and stores them in locally."
+        case .copy:
+            return "These options can be used to import the database from other device."
+        case .write:
+            return "After successfullly imported, if the file is valid then it will write all Health data to HealthKit"
         case .share:
-            return "By clicking this will generate a sharable link. This link will be used in Follow link sections on another device."
-        case .follow:
-            return "Paste the dropbox link which shared from another device."
-        case .downloadWrite:
-            return "If the link is valid then it will keep on downloading the data from dropbox and it will write to HealthKit."
-        case .unfollow:
-            return "By clicking this will stop downloading the data from above link."
+            return "This used to export the locally stored database with other device"
+        case .clearAll:
+            return "This option will clear all the files and folder in local and kill the app"
         }
     }
     
     func rows() -> [Row] {
         switch self {
-        case .login:
-            return [.link]
-        case .logout:
-            return [.unlink]
-        case .readUpload:
-            return [.readUpload,.autoUpload,.autoUploadOverWifiOnly]
+        case .readStore:
+            return [.range, .readStoreAction]
+        case .copy:
+            return [.copyFromClipbord, .copyFromShare]
+        case .write:
+            return [.write]
         case .share:
-            return [.createSharedLink, .copyToClipboard, .shareExtension]
-        case .follow:
-            return [.followLink]
-        case .downloadWrite:
-            return [.downloadWrite, .autoDownload, .autoDownloadOverWifiOnly]
-        case .unfollow:
-            return [.unfollowLink]
+            return [.copyToClipbord, .share]
+        case .clearAll:
+            return [.clearAll]
             
         }
     }
@@ -125,21 +97,17 @@ fileprivate enum Section {
     
 }
 
-let homeRangeSegueIdentifier = "HomeToRangeSegue"
-let zipFilePasteBoardString = "public.zip-archive"
-let jpgFilePasteBoardString = "public.image"
-class HomeViewController: UIViewController, DateRangeViewControllerDelegate {
+let shareRangeSegueIdentifier = "ShareToRangeSegue"
+class ShareViewController: UIViewController, DateRangeViewControllerDelegate {
    
 
     @IBOutlet weak var tableView: UITableView!
     
-    private let sections:[Section] = [.login,
-                                      .logout,
-                                      .readUpload,
+    private let sections:[Section] = [.readStore,
                                       .share,
-                                      .follow,
-                                      .downloadWrite,
-                                      .unfollow]
+                                      .copy,
+                                      .write,
+                                      .clearAll]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Health Kit Data Source"
@@ -175,7 +143,7 @@ class HomeViewController: UIViewController, DateRangeViewControllerDelegate {
     
 }
 
-extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
+extension ShareViewController: UITableViewDelegate,UITableViewDataSource {
     //MARK: TableViewDataSource
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -193,18 +161,17 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
         
         cell.textLabel?.text = row.title()
         
-//        switch row {
-//        case .range:
-//            cell = UITableViewCell.init(style: UITableViewCellStyle.value1, reuseIdentifier: nil)
-//            cell.textLabel?.text = row.title()
-//            cell.detailTextLabel?.text = dateRange.displayText()
-//            cell.detailTextLabel?.numberOfLines = 0
-//            cell.accessoryType = .disclosureIndicator
-//        case .shareWithDropbox:
-//            cell.accessoryType = .disclosureIndicator
-//        default:
-////            cell.textLabel?.textColor = cell.textLabel?.tintColor
-//        }
+        switch row {
+        case .range:
+            cell = UITableViewCell.init(style: UITableViewCellStyle.value1, reuseIdentifier: nil)
+            cell.textLabel?.text = row.title()
+            cell.detailTextLabel?.text = dateRange.displayText()
+            cell.detailTextLabel?.numberOfLines = 0
+            cell.accessoryType = .disclosureIndicator
+        default:
+            cell.textLabel?.textColor = cell.textLabel?.tintColor
+           row = .readStoreAction
+        }
         
         
         
@@ -227,50 +194,43 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
         let row = sections[indexPath.section].rows()[indexPath.row]
         
         switch row {
-        case .link:
-            linkDropBox()
-        case .unlink:
-            logoutDropBox()
-        case .readUpload:
-            readUplaodData()
-        case .autoUpload:
-            auotUpload()
-        case .autoUploadOverWifiOnly:
-            autoUploadOverWiFiOnly()
-        case .createSharedLink:
-            createShareLink()
-        case .copyToClipboard:
-            copyToClipboard()
-        case .shareExtension:
-            shareExtension()
-        case .followLink:
-            followLink()
-        case .autoDownload:
-            autoDownload()
-        case .autoDownloadOverWifiOnly:
-            autoDownloadOverWiFiOnly()
-        case .unfollowLink:
-            unFollowLink()
-        case .downloadWrite:
-            downloadAndWrite()
+        case .range:
+            dateRangeSelected()
+        case .readStoreAction:
+            readAndStoreSelected()
+        case .copyFromClipbord:
+            importFromClipboardSelected()
+        case .copyFromShare:
+            importFromSharedExtensionSelected()
+        case .write:
+            writeDateToHealthKitSelected()
+        case .copyToClipbord:
+            copyToClipboardSelected()
+        case .share:
+            shareSelected()
+        case .clearAll:
+            clearAllSelected()
         }
         
     }
 }
 
-extension HomeViewController {
+extension ShareViewController {
 
     //Selections
     
-    func linkDropBox(){
-        
+    func dateRangeSelected(){
+        self.performSegue(withIdentifier: shareRangeSegueIdentifier, sender: self)
     }
     
-    func logoutDropBox(){
+    func shareWithDropboxSelected(){
         
+        UIApplication.shared.open(URL(string: "dropbox://")!, options: [:]) { (opened) in
+            print("\(opened)")
+        }
     }
     
-    func readUplaodData(){
+    func readAndStoreSelected(){
         
         startActivitiyIndicator(message: "Copying from Health....")
         OperationQueue.main.addOperation {
@@ -307,43 +267,49 @@ extension HomeViewController {
         }
     }
     
-    func auotUpload(){
+    func importFromClipboardSelected(){
         
-    }
-    
-    func autoUploadOverWiFiOnly() {
-        
-    }
-    
-    func createShareLink() {
-        
-    }
-    
-    func copyToClipboard(){
-        
-    }
-    
-    func shareExtension(){
-        
-    }
-    
-    func followLink() {
-        
-    }
-    
-    func downloadAndWrite(){
-        
-    }
-    
-    func autoDownload() {
-        
-    }
-    
-    func autoDownloadOverWiFiOnly() {
-        
-    }
-    
-    func unFollowLink() {
+        var copied  = false
+        startActivitiyIndicator(message: "Copying from Clipboard in progress....")
+        OperationQueue.main.addOperation {
+            
+            if UIPasteboard.general.contains(pasteboardTypes: [jpgFilePasteBoardString]) {
+                
+                let fileData = UIPasteboard.general.value(forPasteboardType: jpgFilePasteBoardString)
+                
+                if let imgFileData:Data = fileData as? Data {
+                    
+                    let pasteImageURLPath = FileUtitlity.getDocumentryUnknownDataFilePath()
+                    
+                    if( FileManager.default.fileExists(atPath: pasteImageURLPath)){
+                        do {
+                            try FileManager.default.removeItem(atPath: pasteImageURLPath)
+                        } catch let error {
+                            print("Error while removing the file \(error)")
+                        }
+                    }
+                    do {
+                        
+                        try imgFileData.write(to: URL.init(fileURLWithPath: pasteImageURLPath) )
+//                        try SSZipArchive.unzipFile(atPath: pasteSqliteURLPath, toDestination: FileUtitlity.getDocumentsDirectory(), overwrite: true, password: zipPassword)
+//                        try FileManager.default.removeItem(atPath: pasteSqliteURLPath)
+                        copied = true
+                    } catch let error{
+                        print("Error while writing the data \(error)")
+                        UIAlertController.showSimpleAlert("Error", message: "Error while writing the data \(error)", viewController: self)
+                    }
+                    
+                }
+            }
+            
+            if !copied {
+                UIAlertController.showSimpleAlert("Zip file error", message: "Clipboard data is not a zip file", viewController: self)
+            }else{
+//                HSPersistentStore.reinitializeUnknownPersistentStore()
+                UIAlertController.showSimpleAlert("Success!", message: "Successfully copied from clipboard", viewController: self)
+            }
+            self.stopAcitivityIndicator()
+        }
         
     }
     
@@ -472,8 +438,4 @@ extension HomeViewController {
         }
     }
     
-}
-
-extension HomeViewController {
-
 }

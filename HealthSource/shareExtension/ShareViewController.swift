@@ -3,7 +3,7 @@
 //  shareExtension
 //
 //  Created by Tamilarasu on 23/01/18.
-//  Copyright © 2018 Tamilarasu Ponnusamy. All rights reserved.
+//  Copyright © 2018 Tamilarasu. All rights reserved.
 //
 
 import UIKit

@@ -19,6 +19,7 @@
 		C61CBF942021E8F200CD75F1 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61CBF902021E8F200CD75F1 /* Configuration.swift */; };
 		C62687A020313BB200B18AC8 /* HSAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C626879F20313BB200B18AC8 /* HSAlert.swift */; };
 		C62687A120313BB200B18AC8 /* HSAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C626879F20313BB200B18AC8 /* HSAlert.swift */; };
+		C6347F9920335C0E008F5DF6 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6347F9820335C0E008F5DF6 /* ShareViewController.swift */; };
 		C659303720186DC3004FAF92 /* FileUtitlity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C659303620186DC3004FAF92 /* FileUtitlity.swift */; };
 		C659303820186DC3004FAF92 /* FileUtitlity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C659303620186DC3004FAF92 /* FileUtitlity.swift */; };
 		C66419B320175DF000EFB204 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66419B220175DF000EFB204 /* ShareViewController.swift */; };
@@ -105,6 +106,7 @@
 		C61BAEB61F8149EF00593580 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		C61CBF902021E8F200CD75F1 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		C626879F20313BB200B18AC8 /* HSAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSAlert.swift; sourceTree = "<group>"; };
+		C6347F9820335C0E008F5DF6 /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		C659303620186DC3004FAF92 /* FileUtitlity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtitlity.swift; sourceTree = "<group>"; };
 		C66419B020175DF000EFB204 /* shareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = shareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C66419B220175DF000EFB204 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +200,14 @@
 			path = configuration;
 			sourceTree = "<group>";
 		};
+		C6347F9720335C0E008F5DF6 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				C6347F9820335C0E008F5DF6 /* ShareViewController.swift */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
 		C66419B120175DF000EFB204 /* shareExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,11 +248,12 @@
 			children = (
 				C6F17864202EFA2C000E9275 /* DateRange */,
 				C6F1785D202EDFC3000E9275 /* Common */,
-				C6B8C22B202BE49D00C6F5D4 /* DropboxHandler */,
+				C6B8C22B202BE49D00C6F5D4 /* DropboxManager */,
 				C61CBF8F2021E8D600CD75F1 /* configuration */,
 				C61BAEB41F8149EF00593580 /* HealthSource.entitlements */,
 				C6B785501F79739800BB33E9 /* AppDelegate.swift */,
 				C659303620186DC3004FAF92 /* FileUtitlity.swift */,
+				C6347F9720335C0E008F5DF6 /* Share */,
 				C6F17859202ED04F000E9275 /* Home */,
 				C6F17858202ED01E000E9275 /* HealthKitManager */,
 				C6B785541F79739800BB33E9 /* Main.storyboard */,
@@ -272,12 +283,12 @@
 			path = HealthSourceUITests;
 			sourceTree = "<group>";
 		};
-		C6B8C22B202BE49D00C6F5D4 /* DropboxHandler */ = {
+		C6B8C22B202BE49D00C6F5D4 /* DropboxManager */ = {
 			isa = PBXGroup;
 			children = (
 				C6B8C22C202BE4CB00C6F5D4 /* DropBoxManager.swift */,
 			);
-			path = DropboxHandler;
+			path = DropboxManager;
 			sourceTree = "<group>";
 		};
 		C6F17858202ED01E000E9275 /* HealthKitManager */ = {
@@ -736,6 +747,7 @@
 			files = (
 				C6B785591F79739800BB33E9 /* HealthSource.xcdatamodeld in Sources */,
 				C659303720186DC3004FAF92 /* FileUtitlity.swift in Sources */,
+				C6347F9920335C0E008F5DF6 /* ShareViewController.swift in Sources */,
 				C6780F60202F2E730072B7D0 /* HSViewController.swift in Sources */,
 				C6F17866202EFA4D000E9275 /* DateRangeViewController.swift in Sources */,
 				C62687A020313BB200B18AC8 /* HSAlert.swift in Sources */,

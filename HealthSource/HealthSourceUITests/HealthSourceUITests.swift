@@ -3,7 +3,7 @@
 //  HealthSourceUITests
 //
 //  Created by Tamilarasu on 25/09/17.
-//  Copyright © 2017 Tamilarasu Ponnusamy. All rights reserved.
+//  Copyright © 2017 Tamilarasu. All rights reserved.
 //
 
 import XCTest

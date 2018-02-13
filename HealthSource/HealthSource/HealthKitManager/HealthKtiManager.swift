@@ -3,7 +3,7 @@
 //  HealthSource
 //
 //  Created by Tamilarasu on 01/10/17.
-//  Copyright © 2017 Tamilarasu Ponnusamy. All rights reserved.
+//  Copyright © 2017 Tamilarasu. All rights reserved.
 //
 
 import UIKit
