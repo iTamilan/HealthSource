@@ -71,8 +71,8 @@ class FileUtitlity: NSObject {
         return FileUtitlity.getDocumentsDirectory() + "/localHealthData.jpg"
     }
     
-    public static func getDocumentryUnknownDataFilePath() ->String {
-        return FileUtitlity.getDocumentsDirectory() + "/unknownHealthData.jpg"
+    public static func getDocumenDirectoryUnknownDataFilePath() ->String {
+        return FileUtitlity.getDocumentsDirectoryDatabse() + "/localHealthData.jpg"
     }
     //MARK:-Group Container
     

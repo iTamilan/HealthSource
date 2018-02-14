@@ -98,6 +98,8 @@ fileprivate enum Section {
 }
 
 let shareRangeSegueIdentifier = "ShareToRangeSegue"
+let zipFilePasteBoardString = "public.zip-archive"
+//let jpgFilePasteBoardString = "public.image"
 class ShareViewController: UIViewController, DateRangeViewControllerDelegate {
    
 
@@ -273,26 +275,26 @@ extension ShareViewController {
         startActivitiyIndicator(message: "Copying from Clipboard in progress....")
         OperationQueue.main.addOperation {
             
-            if UIPasteboard.general.contains(pasteboardTypes: [jpgFilePasteBoardString]) {
+            if UIPasteboard.general.contains(pasteboardTypes: [zipFilePasteBoardString]) {
                 
-                let fileData = UIPasteboard.general.value(forPasteboardType: jpgFilePasteBoardString)
+                let fileData = UIPasteboard.general.value(forPasteboardType: zipFilePasteBoardString)
                 
-                if let imgFileData:Data = fileData as? Data {
+                if let zipFileData:Data = fileData as? Data {
                     
-                    let pasteImageURLPath = FileUtitlity.getDocumentryUnknownDataFilePath()
+                    let pasteZipURLPath = FileUtitlity.getDocumentryNewZipFilePath()
                     
-                    if( FileManager.default.fileExists(atPath: pasteImageURLPath)){
+                    if( FileManager.default.fileExists(atPath: pasteZipURLPath)){
                         do {
-                            try FileManager.default.removeItem(atPath: pasteImageURLPath)
+                            try FileManager.default.removeItem(atPath: pasteZipURLPath)
                         } catch let error {
                             print("Error while removing the file \(error)")
                         }
                     }
                     do {
                         
-                        try imgFileData.write(to: URL.init(fileURLWithPath: pasteImageURLPath) )
-//                        try SSZipArchive.unzipFile(atPath: pasteSqliteURLPath, toDestination: FileUtitlity.getDocumentsDirectory(), overwrite: true, password: zipPassword)
-//                        try FileManager.default.removeItem(atPath: pasteSqliteURLPath)
+                        try zipFileData.write(to: URL.init(fileURLWithPath: pasteZipURLPath) )
+                        try SSZipArchive.unzipFile(atPath: pasteZipURLPath, toDestination: FileUtitlity.getDocumentsDirectoryDatabse(), overwrite: true, password: nil)
+                        try FileManager.default.removeItem(atPath: pasteZipURLPath)
                         copied = true
                     } catch let error{
                         print("Error while writing the data \(error)")
@@ -316,18 +318,20 @@ extension ShareViewController {
     func importFromSharedExtensionSelected(){
         startActivitiyIndicator(message: "Copying from shared space....")
         OperationQueue.main.addOperation {
-            let unknownImagePath = FileUtitlity.getGroupShareUnknownDataFilePath()
-            let localDocuImageFile = FileUtitlity.getDocumentryLocalDataFilePath()
+            let groupUnknownZipPath = FileUtitlity.getGroupShareUnknowZipPath()
+            let documentUnknowZipPath = FileUtitlity.getDocumentryNewZipFilePath()
 //            let documentDirectoryDatabasePath = FileUtitlity.getDocumentsDirectoryDatabse()
             do{
-                if( FileManager.default.fileExists(atPath: unknownImagePath )){
-                    if( FileManager.default.fileExists(atPath: localDocuImageFile)){
+                if( FileManager.default.fileExists(atPath: groupUnknownZipPath )){
+                    if( FileManager.default.fileExists(atPath: documentUnknowZipPath)){
                         
-                        try FileManager.default.removeItem(atPath: localDocuImageFile)
+                        try FileManager.default.removeItem(atPath: documentUnknowZipPath)
                         
                     }
-                    try FileManager.default.copyItem(atPath: unknownImagePath, toPath: localDocuImageFile)
-                    
+                    try FileManager.default.copyItem(atPath: groupUnknownZipPath, toPath: documentUnknowZipPath)
+                    try SSZipArchive.unzipFile(atPath: documentUnknowZipPath, toDestination: FileUtitlity.getDocumentsDirectoryDatabse(), overwrite: true, password: nil)
+                    try FileManager.default.removeItem(atPath: documentUnknowZipPath)
+                     UIAlertController.showSimpleAlert("Success!", message: "File copied from shared extension", viewController: self)
                 }else{
                     UIAlertController.showSimpleAlert("Error!", message: "No data available in shared location", viewController: self)
                 }
@@ -340,10 +344,10 @@ extension ShareViewController {
     
     func writeDateToHealthKitSelected(){
         
-        if( FileManager.default.fileExists(atPath: FileUtitlity.getDocumentryUnknownDataFilePath())){
+        if( FileManager.default.fileExists(atPath: FileUtitlity.getDocumenDirectoryUnknownDataFilePath())){
             self.startActivitiyIndicator(message: "Writing data to Health.....")
             OperationQueue.main.addOperation {
-                let unarchivedObjects = NSKeyedUnarchiver.unarchiveObject(withFile: FileUtitlity.getDocumentryUnknownDataFilePath())
+                let unarchivedObjects = NSKeyedUnarchiver.unarchiveObject(withFile: FileUtitlity.getDocumenDirectoryUnknownDataFilePath())
                 guard let decodedSamples =  unarchivedObjects as? [HKSample] else{
                     print("Samples are invalid")
                     self.stopAcitivityIndicator()
@@ -352,7 +356,7 @@ extension ShareViewController {
                 HealthKtiManager.shared.writeToHealthKit(hkSamples: decodedSamples, completion: { (completed, errors) in
                     do{
                         if errors.count == 0 {
-                            try FileManager.default.removeItem(atPath: FileUtitlity.getDocumentryUnknownDataFilePath())
+                            try FileManager.default.removeItem(atPath: FileUtitlity.getDocumentsDirectoryDatabse())
 //                            HSPersistentStore.reinitializeUnknownPersistentStore()
                             UIAlertController.showSimpleAlert("Success!", message: "All data from local written to AHK and local get cleared", viewController: self)
                         }else{
@@ -375,14 +379,19 @@ extension ShareViewController {
         let folderURL = URL(fileURLWithPath: folderPath)
         
         if(FileManager.default.fileExists(atPath: folderURL.path)){
-//            do{
-            
-                UIPasteboard.general.setValue(folderPath, forPasteboardType: jpgFilePasteBoardString)
+            do{
+                let zipFilePath = FileUtitlity.getDocumentryZipFilePath()
+                if(FileManager.default.fileExists(atPath: zipFilePath)){
+                    try FileManager.default.removeItem(at: URL.init(fileURLWithPath: zipFilePath))
+                }
+                SSZipArchive.createZipFile(atPath: zipFilePath, withFilesAtPaths: [folderPath])
+                
+                UIPasteboard.general.setValue(folderPath, forPasteboardType: zipFilePasteBoardString)
                 UIAlertController.showSimpleAlert("Copied!", message: "local database file copied to clipboard", viewController: self)
-//            }catch let error {
-//                print("error while loading the zip file \(error)")
-//            }
-//
+            }catch let error {
+                print("error while loading the zip file \(error)")
+            }
+
         }else{
             UIAlertController.showSimpleAlert("No database", message: "You can generate the database by clicking \"Copy all HealthKit data to local\" ", viewController: self)
         }
@@ -395,18 +404,19 @@ extension ShareViewController {
         let folderURL = URL(fileURLWithPath: folderPath)
         
         if(FileManager.default.fileExists(atPath: folderURL.path)){
-//            do{
-//                let zipFilePath = FileUtitlity.getDocumentryZipFilePath()
-//                if(FileManager.default.fileExists(atPath: zipFilePath)){
-//                    try FileManager.default.removeItem(at: URL.init(fileURLWithPath: zipFilePath))
-//                }
+            do{
+                let zipFilePath = FileUtitlity.getDocumentryZipFilePath()
+                if(FileManager.default.fileExists(atPath: zipFilePath)){
+                    try FileManager.default.removeItem(at: URL.init(fileURLWithPath: zipFilePath))
+                }
+                SSZipArchive.createZipFile(atPath: zipFilePath, withFilesAtPaths: [folderPath])
 //                SSZipArchive.createZipFile(atPath: zipFilePath, withContentsOfDirectory: folderPath, keepParentDirectory: true)
                 
-                let activityVC = UIActivityViewController(activityItems: [URL.init(fileURLWithPath: folderPath)], applicationActivities: nil)
+                let activityVC = UIActivityViewController(activityItems: [URL.init(fileURLWithPath: zipFilePath)], applicationActivities: nil)
                 self.present(activityVC, animated: true, completion: nil)
-//            }catch let error {
-//                print("error while loading the zip file \(error)")
-//            }
+            }catch let error {
+                print("error while loading the zip file \(error)")
+            }
             
         }else{
             UIAlertController.showSimpleAlert("No database", message: "You can generate the database by clicking \"Copy all HealthKit data to local\" ", viewController: self)
@@ -418,11 +428,14 @@ extension ShareViewController {
         self.startActivitiyIndicator(message: "Writing data to Health.....")
         OperationQueue.main.addOperation {
             do{
-                let supportDatabase = FileUtitlity.getDocumentryLocalDataFilePath()
-                let documentDirectoryBase = FileUtitlity.getDocumentryUnknownDataFilePath()
-                let unknownZipPath = FileUtitlity.getDocumentryLocalDataFilePath()
+                let shareFile = FileUtitlity.getGroupShareUnknowZipPath()
+                let documentDirectoryBase = FileUtitlity.getDocumentsDirectoryDatabse()
+                let localZipPath = FileUtitlity.getDocumentryZipFilePath()
+                let localunknownZip = FileUtitlity.getDocumentryNewZipFilePath()
+                let localImagePath = FileUtitlity.getDocumentryLocalDataFilePath()
+                let unknownDataFilePath = FileUtitlity.getDocumenDirectoryUnknownDataFilePath()
 //                let directoryContents = try FileManager.default.contentsOfDirectory(atPath: documentDirectoryBase)
-                let paths = [supportDatabase,documentDirectoryBase,unknownZipPath]
+                let paths = [shareFile,documentDirectoryBase,localZipPath,localunknownZip,localImagePath,unknownDataFilePath]
 //                paths.append(contentsOf: directoryContents)
                 for path in paths {
                     if FileManager.default.fileExists(atPath: path){

@@ -13,7 +13,7 @@ class ShareViewController: SLComposeServiceViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let content = extensionContext!.inputItems[0] as! NSExtensionItem
-        let contentType = "public.image"
+        let contentType = "public.url"
         var isValidContext = false
         for attachment in content.attachments as! [NSItemProvider] {
             if attachment.hasItemConformingToTypeIdentifier(contentType) {
@@ -68,7 +68,7 @@ class ShareViewController: SLComposeServiceViewController {
                 attachment.loadDataRepresentation(forTypeIdentifier: contentType, completionHandler: { (data, error) in
                     if error == nil {
                         var copied  = false
-                        let pasteSqliteURLPath = FileUtitlity.getGroupShareUnknownDataFilePath()
+                        let pasteSqliteURLPath = FileUtitlity.getGroupShareUnknowZipPath()
                         //                let pasteSqliteURL = URL(fileURLWithPath: pasteSqliteURLPath)
                         if( FileManager.default.fileExists(atPath: pasteSqliteURLPath)){
                             do {
@@ -106,7 +106,7 @@ class ShareViewController: SLComposeServiceViewController {
                 attachment.loadFileRepresentation(forTypeIdentifier: contentTypeURL, completionHandler: { (contentURL, error) in
                     if error == nil {
                         var copied  = false
-                        let pasteSqliteURLPath = FileUtitlity.getGroupShareUnknownDataFilePath()
+                        let pasteSqliteURLPath = FileUtitlity.getGroupShareUnknowZipPath()
                         //                let pasteSqliteURL = URL(fileURLWithPath: pasteSqliteURLPath)
                         if( FileManager.default.fileExists(atPath: pasteSqliteURLPath)){
                             do {
