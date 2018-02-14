@@ -13,7 +13,7 @@
         <scene sceneID="zMA-DR-b1Z">
             <objects>
                 <navigationController id="eEh-a9-S8A" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Dropbox" image="Dropbox_iOS" id="eXf-co-D3S"/>
+                    <tabBarItem key="tabBarItem" title="Dropbox" image="DropboxIcon" selectedImage="DropboxIcon" id="eXf-co-D3S"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ph2-Nh-TZP">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -30,25 +30,43 @@
         <scene sceneID="Juf-99-Sub">
             <objects>
                 <tabBarController id="6FR-Bw-THH" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lxT-pa-n3Z">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="lxT-pa-n3Z">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="eEh-a9-S8A" kind="relationship" relationship="viewControllers" id="NBM-BE-UO4"/>
-                        <segue destination="ZgW-Aj-eje" kind="relationship" relationship="viewControllers" id="jhd-sj-2NT"/>
+                        <segue destination="Nrl-ho-jHH" kind="relationship" relationship="viewControllers" id="ok2-4p-nxY"/>
+                        <segue destination="ZgW-Aj-eje" kind="relationship" relationship="viewControllers" id="BEZ-va-EQe"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="weA-0H-XQy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2410" y="1172"/>
+            <point key="canvasLocation" x="-2108" y="1479"/>
         </scene>
-        <!--Share-->
+        <!--Navigation Controller-->
+        <scene sceneID="DCJ-bi-a2A">
+            <objects>
+                <navigationController id="Nrl-ho-jHH" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="downloads" id="Km3-Y2-MxG"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="d2j-Nw-8o8">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="SWy-Cz-hsa" kind="relationship" relationship="rootViewController" id="PX9-KS-3ef"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EGC-l5-FGc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-690" y="1481"/>
+        </scene>
+        <!--Navigation Controller-->
         <scene sceneID="AQZ-4w-Xs0">
             <objects>
                 <navigationController id="ZgW-Aj-eje" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Share" id="W9J-Uv-w45"/>
+                    <tabBarItem key="tabBarItem" selectedImage="Image" systemItem="more" id="W9J-Uv-w45"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="k3s-n3-wqf">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -59,14 +77,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wwM-LC-rVV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-690" y="1529"/>
+            <point key="canvasLocation" x="-690" y="2195"/>
         </scene>
         <!--Share View Controller-->
         <scene sceneID="S9y-cn-Jiv">
             <objects>
                 <viewController id="5oW-e1-57d" customClass="ShareViewController" customModule="HealthSource" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TG9-3U-DIf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="0Qb-p2-L3X">
@@ -126,14 +144,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hfK-jo-s8i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="249" y="1529"/>
+            <point key="canvasLocation" x="249" y="2195"/>
         </scene>
-        <!--Home View Controller-->
+        <!--Dropbox Upload View Controller-->
         <scene sceneID="pSI-Ob-hbH">
             <objects>
-                <viewController id="3ga-rN-e3b" customClass="HomeViewController" customModule="HealthSource" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3ga-rN-e3b" customClass="DropboxUploadViewController" customModule="HealthSource" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yuD-nQ-Dft">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="XpA-S9-5Zx">
@@ -199,7 +217,7 @@
             <objects>
                 <viewController id="yKL-N8-BQt" customClass="DateRangeViewController" customModule="HealthSource" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mlv-po-ySd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="dMY-AV-Jl1">
@@ -321,10 +339,77 @@ Label</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wWG-m7-8EV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2106" y="1529"/>
+            <point key="canvasLocation" x="1290" y="2147"/>
+        </scene>
+        <!--Dropbox DownloadV Iew Controller-->
+        <scene sceneID="xyK-Z4-Ibu">
+            <objects>
+                <viewController id="SWy-Cz-hsa" customClass="DropboxDownloadVIewController" customModule="HealthSource" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ICa-H2-PUa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="2sY-A4-gl0">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="dtO-xA-0kz">
+                                    <rect key="frame" x="0.0" y="117.5" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="34z-NJ-gGf" detailTextLabel="70t-wJ-3i7" style="IBUITableViewCellStyleValue1" id="d4f-BE-rPU">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d4f-BE-rPU" id="uSS-H9-wpY">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="34z-NJ-gGf">
+                                                    <rect key="frame" x="15" y="12" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="70t-wJ-3i7">
+                                                    <rect key="frame" x="316" y="12" width="44" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="SWy-Cz-hsa" id="EC1-pz-DpV"/>
+                                    <outlet property="delegate" destination="SWy-Cz-hsa" id="EJN-h2-7Ug"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="2sY-A4-gl0" firstAttribute="leading" secondItem="A57-K9-a6y" secondAttribute="leading" id="cPC-80-W6l"/>
+                            <constraint firstItem="A57-K9-a6y" firstAttribute="bottom" secondItem="2sY-A4-gl0" secondAttribute="bottom" id="fCc-il-r2m"/>
+                            <constraint firstItem="2sY-A4-gl0" firstAttribute="top" secondItem="A57-K9-a6y" secondAttribute="top" id="mib-4N-gXt"/>
+                            <constraint firstItem="A57-K9-a6y" firstAttribute="trailing" secondItem="2sY-A4-gl0" secondAttribute="trailing" id="wzx-EG-wUh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="A57-K9-a6y"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="AMA-MZ-qJw"/>
+                    <connections>
+                        <outlet property="tableView" destination="2sY-A4-gl0" id="gdn-8c-Ahw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w89-FV-yxv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="249" y="1480"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Dropbox_iOS" width="20" height="20"/>
+        <image name="DropboxIcon" width="25" height="25"/>
+        <image name="Image" width="20" height="20"/>
     </resources>
 </document>

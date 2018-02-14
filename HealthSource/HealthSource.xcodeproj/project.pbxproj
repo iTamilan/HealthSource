@@ -20,6 +20,8 @@
 		C62687A020313BB200B18AC8 /* HSAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C626879F20313BB200B18AC8 /* HSAlert.swift */; };
 		C62687A120313BB200B18AC8 /* HSAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C626879F20313BB200B18AC8 /* HSAlert.swift */; };
 		C6347F9920335C0E008F5DF6 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6347F9820335C0E008F5DF6 /* ShareViewController.swift */; };
+		C6347F9E2033E00B008F5DF6 /* DropboxUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6347F9B2033E00A008F5DF6 /* DropboxUploadViewController.swift */; };
+		C6347F9F2033E00B008F5DF6 /* DropboxDownloadVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6347F9D2033E00A008F5DF6 /* DropboxDownloadVIewController.swift */; };
 		C659303720186DC3004FAF92 /* FileUtitlity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C659303620186DC3004FAF92 /* FileUtitlity.swift */; };
 		C659303820186DC3004FAF92 /* FileUtitlity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C659303620186DC3004FAF92 /* FileUtitlity.swift */; };
 		C66419B320175DF000EFB204 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66419B220175DF000EFB204 /* ShareViewController.swift */; };
@@ -38,7 +40,6 @@
 		C6C9FE5E203084D200A0AD94 /* HSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C9FE5D203084D200A0AD94 /* HSUserDefaults.swift */; };
 		C6C9FE6120308A2800A0AD94 /* HSQueryAnchoreDicionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C9FE6020308A2800A0AD94 /* HSQueryAnchoreDicionary.swift */; };
 		C6C9FE64203097D700A0AD94 /* HSPersistentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C9FE63203097D700A0AD94 /* HSPersistentStore.swift */; };
-		C6F1785B202ED04F000E9275 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F1785A202ED04F000E9275 /* HomeViewController.swift */; };
 		C6F1785F202EDFF1000E9275 /* HSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F1785E202EDFF1000E9275 /* HSDate.swift */; };
 		C6F17860202EDFF1000E9275 /* HSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F1785E202EDFF1000E9275 /* HSDate.swift */; };
 		C6F17862202EF37B000E9275 /* HSDateRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F17861202EF37B000E9275 /* HSDateRange.swift */; };
@@ -107,6 +108,8 @@
 		C61CBF902021E8F200CD75F1 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		C626879F20313BB200B18AC8 /* HSAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSAlert.swift; sourceTree = "<group>"; };
 		C6347F9820335C0E008F5DF6 /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		C6347F9B2033E00A008F5DF6 /* DropboxUploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropboxUploadViewController.swift; sourceTree = "<group>"; };
+		C6347F9D2033E00A008F5DF6 /* DropboxDownloadVIewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropboxDownloadVIewController.swift; sourceTree = "<group>"; };
 		C659303620186DC3004FAF92 /* FileUtitlity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtitlity.swift; sourceTree = "<group>"; };
 		C66419B020175DF000EFB204 /* shareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = shareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C66419B220175DF000EFB204 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
@@ -133,7 +136,6 @@
 		C6C9FE5D203084D200A0AD94 /* HSUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSUserDefaults.swift; sourceTree = "<group>"; };
 		C6C9FE6020308A2800A0AD94 /* HSQueryAnchoreDicionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSQueryAnchoreDicionary.swift; sourceTree = "<group>"; };
 		C6C9FE63203097D700A0AD94 /* HSPersistentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSPersistentStore.swift; sourceTree = "<group>"; };
-		C6F1785A202ED04F000E9275 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C6F1785E202EDFF1000E9275 /* HSDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSDate.swift; sourceTree = "<group>"; };
 		C6F17861202EF37B000E9275 /* HSDateRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSDateRange.swift; sourceTree = "<group>"; };
 		C6F17865202EFA4D000E9275 /* DateRangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRangeViewController.swift; sourceTree = "<group>"; };
@@ -208,6 +210,22 @@
 			path = Share;
 			sourceTree = "<group>";
 		};
+		C6347F9A2033E00A008F5DF6 /* DropboxUpload */ = {
+			isa = PBXGroup;
+			children = (
+				C6347F9B2033E00A008F5DF6 /* DropboxUploadViewController.swift */,
+			);
+			path = DropboxUpload;
+			sourceTree = "<group>";
+		};
+		C6347F9C2033E00A008F5DF6 /* DropboxDownload */ = {
+			isa = PBXGroup;
+			children = (
+				C6347F9D2033E00A008F5DF6 /* DropboxDownloadVIewController.swift */,
+			);
+			path = DropboxDownload;
+			sourceTree = "<group>";
+		};
 		C66419B120175DF000EFB204 /* shareExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,8 +271,9 @@
 				C61BAEB41F8149EF00593580 /* HealthSource.entitlements */,
 				C6B785501F79739800BB33E9 /* AppDelegate.swift */,
 				C659303620186DC3004FAF92 /* FileUtitlity.swift */,
+				C6347F9A2033E00A008F5DF6 /* DropboxUpload */,
+				C6347F9C2033E00A008F5DF6 /* DropboxDownload */,
 				C6347F9720335C0E008F5DF6 /* Share */,
-				C6F17859202ED04F000E9275 /* Home */,
 				C6F17858202ED01E000E9275 /* HealthKitManager */,
 				C6B785541F79739800BB33E9 /* Main.storyboard */,
 				C6B7855A1F79739800BB33E9 /* Assets.xcassets */,
@@ -298,14 +317,6 @@
 				C61BAEB01F81348400593580 /* HealthKitManger+AllDataTypes.swift */,
 			);
 			path = HealthKitManager;
-			sourceTree = "<group>";
-		};
-		C6F17859202ED04F000E9275 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				C6F1785A202ED04F000E9275 /* HomeViewController.swift */,
-			);
-			path = Home;
 			sourceTree = "<group>";
 		};
 		C6F1785D202EDFC3000E9275 /* Common */ = {
@@ -750,14 +761,15 @@
 				C6347F9920335C0E008F5DF6 /* ShareViewController.swift in Sources */,
 				C6780F60202F2E730072B7D0 /* HSViewController.swift in Sources */,
 				C6F17866202EFA4D000E9275 /* DateRangeViewController.swift in Sources */,
+				C6347F9E2033E00B008F5DF6 /* DropboxUploadViewController.swift in Sources */,
 				C62687A020313BB200B18AC8 /* HSAlert.swift in Sources */,
+				C6347F9F2033E00B008F5DF6 /* DropboxDownloadVIewController.swift in Sources */,
 				C6C9FE5E203084D200A0AD94 /* HSUserDefaults.swift in Sources */,
 				C61CBF912021E8F200CD75F1 /* Configuration.swift in Sources */,
 				C6F17862202EF37B000E9275 /* HSDateRange.swift in Sources */,
 				C6C9FE64203097D700A0AD94 /* HSPersistentStore.swift in Sources */,
 				C6B8C22D202BE4CB00C6F5D4 /* DropBoxManager.swift in Sources */,
 				C6F17872202EFD85000E9275 /* PickerTableViewCell.swift in Sources */,
-				C6F1785B202ED04F000E9275 /* HomeViewController.swift in Sources */,
 				C61BAEAF1F81280800593580 /* HealthKtiManager.swift in Sources */,
 				C61BAEB11F81348400593580 /* HealthKitManger+AllDataTypes.swift in Sources */,
 				C6F1785F202EDFF1000E9275 /* HSDate.swift in Sources */,

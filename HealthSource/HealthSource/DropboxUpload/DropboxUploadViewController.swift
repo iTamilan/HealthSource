@@ -18,16 +18,11 @@ fileprivate enum Row{
     case createSharedLink
     case copyToClipboard
     case shareExtension
-    case followLink
-    case downloadWrite
-    case autoDownload
-    case autoDownloadOverWifiOnly
-    case unfollowLink
     
     func title() -> String {
         switch self {
         case .link:
-            return "Link your dropbox"
+            return "Link your Dropbox"
         case .unlink:
             return "Logout dropbox"
         case .readUpload:
@@ -42,16 +37,6 @@ fileprivate enum Row{
             return "Copy To Clipboard"
         case .shareExtension:
             return "Share Link"
-        case .followLink:
-            return "Paste Link"
-        case .downloadWrite:
-            return "Download & Write"
-        case .autoDownload:
-            return "Auto Download"
-        case .autoDownloadOverWifiOnly:
-            return "Auto Download over WiFi only"
-        case .unfollowLink:
-            return "Unfollow Link"
         }
     }
 }
@@ -61,25 +46,16 @@ fileprivate enum Section {
     case logout
     case readUpload
     case share
-    case follow
-    case downloadWrite
-    case unfollow
     func headerTitle() -> String {
         switch self {
         case .login:
             return "Link Dropbox"
         case .logout:
-            return "Logout Dropbox"
+            return ""
         case .readUpload:
             return "Read & upload HealthKitData"
         case .share:
             return "Share"
-        case .follow:
-            return "Download"
-        case .downloadWrite:
-            return "Download & Add to HealthKitData"
-        case .unfollow:
-            return ""
         }
     }
     
@@ -93,12 +69,6 @@ fileprivate enum Section {
             return "It will read the HealthKit data periodically and start uploading data to your dropbox account. By enabling the \"AutoUpload\" will read and upload the HealthData for every 15 min interval. By enabling the \"Auto Upload over WiFi onnly\" will enable the automated upload only over WiFi but read and store locally will happen."
         case .share:
             return "By clicking this will generate a sharable link. This link will be used in Follow link sections on another device."
-        case .follow:
-            return "Paste the dropbox link which shared from another device."
-        case .downloadWrite:
-            return "If the link is valid then it will keep on downloading the data from dropbox and it will write to HealthKit."
-        case .unfollow:
-            return "By clicking this will stop downloading the data from above link."
         }
     }
     
@@ -112,12 +82,6 @@ fileprivate enum Section {
             return [.readUpload,.autoUpload,.autoUploadOverWifiOnly]
         case .share:
             return [.createSharedLink, .copyToClipboard, .shareExtension]
-        case .follow:
-            return [.followLink]
-        case .downloadWrite:
-            return [.downloadWrite, .autoDownload, .autoDownloadOverWifiOnly]
-        case .unfollow:
-            return [.unfollowLink]
             
         }
     }
@@ -125,24 +89,22 @@ fileprivate enum Section {
     
 }
 
-let homeRangeSegueIdentifier = "HomeToRangeSegue"
-let zipFilePasteBoardString = "public.zip-archive"
+//let homeRangeSegueIdentifier = "HomeToRangeSegue"
+//let zipFilePasteBoardString = "public.zip-archive"
 let jpgFilePasteBoardString = "public.image"
-class HomeViewController: UIViewController, DateRangeViewControllerDelegate {
+class DropboxUploadViewController: UIViewController, DateRangeViewControllerDelegate {
    
 
     @IBOutlet weak var tableView: UITableView!
     
     private let sections:[Section] = [.login,
-                                      .logout,
                                       .readUpload,
                                       .share,
-                                      .follow,
-                                      .downloadWrite,
-                                      .unfollow]
+                                      .logout,
+                                      ]
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Dropbox"
+        self.title = "Upload"
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
         // Do any additional setup after loading the view.
@@ -175,7 +137,7 @@ class HomeViewController: UIViewController, DateRangeViewControllerDelegate {
     
 }
 
-extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
+extension DropboxUploadViewController: UITableViewDelegate,UITableViewDataSource {
     //MARK: TableViewDataSource
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -243,22 +205,12 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
             copyToClipboard()
         case .shareExtension:
             shareExtension()
-        case .followLink:
-            followLink()
-        case .autoDownload:
-            autoDownload()
-        case .autoDownloadOverWifiOnly:
-            autoDownloadOverWiFiOnly()
-        case .unfollowLink:
-            unFollowLink()
-        case .downloadWrite:
-            downloadAndWrite()
         }
         
     }
 }
 
-extension HomeViewController {
+extension DropboxUploadViewController {
 
     //Selections
     
@@ -472,8 +424,4 @@ extension HomeViewController {
         }
     }
     
-}
-
-extension HomeViewController {
-
 }
