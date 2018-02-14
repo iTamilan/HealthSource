@@ -8,7 +8,7 @@
 
 import UIKit
 import HealthKit
-
+import SSZipArchive
 fileprivate enum Row{
     case link
     case unlink
@@ -251,11 +251,13 @@ extension DropboxUploadViewController {
     //Selections
     
     func linkDropBox(){
+        startActivitiyIndicator(message: "Linking Dropbox....")
         DropBoxManager.shared.authorizeFromController(controller: self) { (authendicated) in
-            if authendicated {
-                OperationQueue.main.addOperation {
+            OperationQueue.main.addOperation {
+                if authendicated {
                     self.refreshSections()
                 }
+                self.stopAcitivityIndicator()
             }
         }
     }
@@ -274,35 +276,36 @@ extension DropboxUploadViewController {
         startActivitiyIndicator(message: "Copying from Health....")
         OperationQueue.main.addOperation {
             //Your
-            let folderPath = FileUtitlity.getDocumentryLocalDataFilePath()
-            let folderURL = URL(fileURLWithPath: folderPath)
-            do{
-                if(FileManager.default.fileExists(atPath: folderURL.path)){
-                    try FileManager.default.removeItem(at: folderURL)
-//                    HSPersistentStore.reinitializeLocalPersistentStore()
-                }
-            }catch let error {
-                print("Error while removing the SQliteFile \(error)")
-                self.stopAcitivityIndicator()
-            }
             
-            HealthKtiManager.shared.fetchAllHealthData{ (completed, hksamples, error) in
+            HealthKtiManager.shared.fetchAllHealthData(startDate: nil, endDate: nil, anchorQueryDict: HSUserDefaults.shared.getHKAnchorQueryDictionary(), completion: { (completed, anchoredDict, hksamples, error) in
                 OperationQueue.main.addOperation {
+                    var saved = false
                     if let samples = hksamples {
-//                        HSPersistentStore.localPersistent.saveHKSamples(samples)
-                        let saved = NSKeyedArchiver.archiveRootObject(samples, toFile: FileUtitlity.getDocumentryLocalDataFilePath())
+                        let timeinterval: Int64 =  Int64(Date().timeIntervalSince1970)
+                        let zipFilePath = FileUtitlity.getDocumentsDirectoryDropboxPendingUpload() + "/\(timeinterval).zip"
+                        let filePath = FileUtitlity.getDocumentryTempFilePath()
+                        saved = NSKeyedArchiver.archiveRootObject(samples, toFile: filePath)
+//                        let zipArchive =  SSZipArchive.init(path: filePath)
+//                        let data = NSKeyedArchiver.archivedData(withRootObject: samples)
+                         SSZipArchive.createZipFile(atPath: zipFilePath, withFilesAtPaths: [filePath])
+                        
                         if saved {
-                            print("Data written to local")
+                            print("Dropbox zipfile \(filePath) added ")
+                            if let hkQueryAnchorDict = anchoredDict {
+                                HSUserDefaults.shared.setHKQueryAnchoreDicionary(dictionory: hkQueryAnchorDict)
+                            }
+                        }else {
+                            
                         }
                     }
                     self.stopAcitivityIndicator()
-                    if error != nil {
-                        UIAlertController.showSimpleAlert("Error!", message: error?.localizedDescription, viewController: self)
+                    if error != nil || saved == false {
+                        UIAlertController.showSimpleAlert("Error!", message: error?.localizedDescription ?? "Error occuren while reading", viewController: self)
                     }else{
                         UIAlertController.showSimpleAlert("Info!", message: "All Healthkit data copied to app database. Now ready to share", viewController: self)
                     }
                 }
-            }
+            })
         }
     }
     

@@ -39,7 +39,7 @@ class HealthKtiManager: NSObject {
         }
         
     }
-    public func fetchAllHealthData(startDate:Date,endDate:Date, anchorQueryDict:HSQueryAnchorDictionay?, completion: @escaping (Bool, HSQueryAnchorDictionay?, [HKSample]?, Error?) -> Swift.Void){
+    public func fetchAllHealthData(startDate:Date?,endDate:Date?, anchorQueryDict:HSQueryAnchorDictionay?, completion: @escaping (Bool, HSQueryAnchorDictionay?, [HKSample]?, Error?) -> Swift.Void){
         self.getPermissions { (completed, error) in
             guard error == nil else {
                 

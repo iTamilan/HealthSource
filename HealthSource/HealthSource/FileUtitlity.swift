@@ -27,6 +27,14 @@ class FileUtitlity: NSObject {
         return  FileUtitlity.getDocumentsDirectory()+"/Database"
     }
     
+    public static func getDocumentsDirectoryDropboxUpload() -> String {
+        return  FileUtitlity.getDocumentsDirectory()+"/DropboxUpload"
+    }
+    
+    public static func getDocumentsDirectoryDropboxPendingUpload() -> String {
+        return  FileUtitlity.getDocumentsDirectoryDropboxUpload()+"/Pending"
+    }
+    
     public static func getApplicationSupportDirectoryDatabase() -> String {
         return  FileUtitlity.getApplicationSupportDirectory()+"/Database"
     }
@@ -69,6 +77,11 @@ class FileUtitlity: NSObject {
     
     public static func getDocumentryLocalDataFilePath() ->String {
         return FileUtitlity.getDocumentsDirectory() + "/localHealthData.jpg"
+    }
+    
+    
+    public static func getDocumentryTempFilePath() ->String {
+        return FileUtitlity.getDocumentsDirectory() + "/Temp/localHealthData.jpg"
     }
     
     public static func getDocumenDirectoryUnknownDataFilePath() ->String {

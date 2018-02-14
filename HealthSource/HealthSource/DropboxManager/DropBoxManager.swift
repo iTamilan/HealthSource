@@ -31,8 +31,7 @@ public class DropBoxManager {
     public func authorizeFromController(controller: UIViewController?, completion: @escaping ((Bool) -> Void)){
         self.completionHandler = completion
         DropboxClientsManager.authorizeFromController(UIApplication.shared, controller: controller, openURL: {(url: URL) -> Void in
-            print("Drop logged in with URL \(url)")
-            
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         })
     }
     
@@ -60,6 +59,10 @@ public class DropBoxManager {
                 completionHandler = nil
             }
             return true
+        }
+        if let completionHandlerAvailable = completionHandler {
+            completionHandlerAvailable(false)
+            completionHandler = nil
         }
         return false
     }
