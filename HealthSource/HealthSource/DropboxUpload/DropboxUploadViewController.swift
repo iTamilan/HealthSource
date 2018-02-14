@@ -273,6 +273,14 @@ extension DropboxUploadViewController {
     
     func readUplaodData(){
         
+        if !FileManager.default.fileExists(atPath: FileUtitlity.getDocumentsDirectoryDropboxPendingUpload()){
+            do{
+            try FileManager.default.createDirectory(at: URL(fileURLWithPath: FileUtitlity.getDocumentsDirectoryDropboxPendingUpload()) , withIntermediateDirectories: true, attributes: nil)
+            }catch let error {
+                print("Error while creating the directories \(error)");
+            }
+        }
+        
         startActivitiyIndicator(message: "Copying from Health....")
         OperationQueue.main.addOperation {
             //Your
@@ -283,14 +291,17 @@ extension DropboxUploadViewController {
                     if let samples = hksamples {
                         let timeinterval: Int64 =  Int64(Date().timeIntervalSince1970)
                         let zipFilePath = FileUtitlity.getDocumentsDirectoryDropboxPendingUpload() + "/\(timeinterval).zip"
-                        let filePath = FileUtitlity.getDocumentryTempFilePath()
-                        saved = NSKeyedArchiver.archiveRootObject(samples, toFile: filePath)
-//                        let zipArchive =  SSZipArchive.init(path: filePath)
-//                        let data = NSKeyedArchiver.archivedData(withRootObject: samples)
-                         SSZipArchive.createZipFile(atPath: zipFilePath, withFilesAtPaths: [filePath])
+//                        let filePath = FileUtitlity.getDocumentryTempFilePath()
+//                        saved = NSKeyedArchiver.archiveRootObject(samples, toFile: filePath)
+                        let zipArchive =  SSZipArchive.init(path: zipFilePath)
+                        let data = NSKeyedArchiver.archivedData(withRootObject: samples)
+                        zipArchive.open()
+                        saved = zipArchive.write(data, filename: "\(timeinterval).jpg", withPassword: nil)
+                        zipArchive.close()
+//                         SSZipArchive.createZipFile(atPath: zipFilePath, withFilesAtPaths: [filePath])
                         
                         if saved {
-                            print("Dropbox zipfile \(filePath) added ")
+                            print("Dropbox zipfile \(zipFilePath) added ")
                             if let hkQueryAnchorDict = anchoredDict {
                                 HSUserDefaults.shared.setHKQueryAnchoreDicionary(dictionory: hkQueryAnchorDict)
                             }
