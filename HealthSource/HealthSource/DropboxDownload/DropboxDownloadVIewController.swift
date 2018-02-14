@@ -91,8 +91,7 @@ class DropboxDownloadVIewController: UIViewController, DateRangeViewControllerDe
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
         // Do any additional setup after loading the view.
-        let url = URL(string: "youtube://")
-        print("Can openURL \(UIApplication.shared.canOpenURL(url!))")
+       
     }
 
     override func didReceiveMemoryWarning() {

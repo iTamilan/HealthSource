@@ -9,11 +9,13 @@
 import Foundation
 import SwiftyDropbox
 
+typealias CompletionHandler = (Bool) -> Void
 public class DropBoxManager {
     public static let shared = DropBoxManager(with: dropboxAppKey)
     
     let appKey:String
     
+    private var completionHandler : CompletionHandler?
     //MARK: Init
     
     public init(with appKey:String){
@@ -26,10 +28,11 @@ public class DropBoxManager {
             return DropboxClientsManager.authorizedClient != nil
     }
     
-    public static func authorizeFromController(controller: UIViewController?, completion: @escaping ((Bool) -> Void)){
-        
+    public func authorizeFromController(controller: UIViewController?, completion: @escaping ((Bool) -> Void)){
+        self.completionHandler = completion
         DropboxClientsManager.authorizeFromController(UIApplication.shared, controller: controller, openURL: {(url: URL) -> Void in
-                completion(DropBoxManager.shared.handleRedirectURL(url))
+            print("Drop logged in with URL \(url)")
+            
         })
     }
     
@@ -51,6 +54,10 @@ public class DropBoxManager {
                 print("Authorization flow was manually canceled by user!")
             case .error(_, let description):
                 print("Error: \(description)")
+            }
+            if let completionHandlerAvailable = completionHandler {
+                completionHandlerAvailable(true)
+                completionHandler = nil
             }
             return true
         }

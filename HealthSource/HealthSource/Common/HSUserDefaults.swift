@@ -28,3 +28,38 @@ class HSUserDefaults {
         UserDefaults.standard.synchronize()
     }
 }
+
+private let autoUploadUDKey = "AutoUploadUDKey"
+private let autoUploadWiFiUDKey = "AutoUploadWiFiUDKey"
+private let autoUploadSharedUDKey = "AutoUploadSharedLinkUDKey"
+
+extension HSUserDefaults {
+    
+    static func autoUpload() -> Bool {
+        return UserDefaults.standard.bool(forKey: autoUploadUDKey)
+    }
+    
+    static func setAutoUpload(_ auto: Bool){
+        UserDefaults.standard.set(auto, forKey: autoUploadUDKey)
+        UserDefaults.standard.synchronize()
+    }
+    
+    static func setAutoUploadOverWifi(_ auto: Bool){
+        UserDefaults.standard.set(auto, forKey: autoUploadWiFiUDKey)
+        UserDefaults.standard.synchronize()
+    }
+    
+    static func autoUploadOverWiFi() -> Bool {
+        return UserDefaults.standard.bool(forKey: autoUploadWiFiUDKey)
+    }
+    
+    static func setAutoUploadSharedLink(_ urlPath: String){
+        UserDefaults.standard.set(urlPath, forKey: autoUploadSharedUDKey)
+        UserDefaults.standard.synchronize()
+    }
+    
+    static func autoUploadSharedLink() -> String? {
+        return UserDefaults.standard.value(forKey: autoUploadSharedUDKey) as? String
+    }
+}
+

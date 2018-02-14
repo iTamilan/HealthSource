@@ -18,13 +18,14 @@ fileprivate enum Row{
     case createSharedLink
     case copyToClipboard
     case shareExtension
+    case showQRCode
     
     func title() -> String {
         switch self {
         case .link:
-            return "Link your Dropbox"
+            return "Connect Dropbox"
         case .unlink:
-            return "Logout dropbox"
+            return "Logout"
         case .readUpload:
             return "Read & upload"
         case .autoUpload:
@@ -36,7 +37,9 @@ fileprivate enum Row{
         case .copyToClipboard:
             return "Copy To Clipboard"
         case .shareExtension:
-            return "Share Link"
+            return "Share"
+        case .showQRCode:
+            return "Show QR Code"
         }
     }
 }
@@ -49,20 +52,24 @@ fileprivate enum Section {
     func headerTitle() -> String {
         switch self {
         case .login:
-            return "Link Dropbox"
+            return "Connect"
         case .logout:
             return ""
         case .readUpload:
             return "Read & upload HealthKitData"
         case .share:
-            return "Share"
+            if let sharePath = HSUserDefaults.autoUploadSharedLink() {
+                return sharePath
+            }else{
+                return ""
+            }
         }
     }
     
     func footerTitle() -> String {
         switch self {
         case .login:
-            return "Link your \"DROPBOX\" to share your Health Data through dropbox."
+            return "Link your \"DROPBOX\" account to share your Health Data. Only with this application those files can be extract."
         case .logout:
             return "This will stop uploading your HealthData to Dropbox"
         case .readUpload:
@@ -81,7 +88,7 @@ fileprivate enum Section {
         case .readUpload:
             return [.readUpload,.autoUpload,.autoUploadOverWifiOnly]
         case .share:
-            return [.createSharedLink, .copyToClipboard, .shareExtension]
+            return [.createSharedLink, .copyToClipboard, .shareExtension, .showQRCode]
             
         }
     }
@@ -96,20 +103,19 @@ class DropboxUploadViewController: UIViewController, DateRangeViewControllerDele
    
 
     @IBOutlet weak var tableView: UITableView!
+    private let autoUploadSwitch = UISwitch()
+    private let autoUploadOverWiFiSwitch = UISwitch()
     
-    private let sections:[Section] = [.login,
-                                      .readUpload,
-                                      .share,
-                                      .logout,
-                                      ]
+    private var sections:[Section] = [.login]
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Upload"
+        self.title = "Dropbox Share"
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
         // Do any additional setup after loading the view.
-        let url = URL(string: "youtube://")
-        print("Can openURL \(UIApplication.shared.canOpenURL(url!))")
+        configureSwitch()
+        refreshSections()
+       
     }
 
     override func didReceiveMemoryWarning() {
@@ -129,9 +135,34 @@ class DropboxUploadViewController: UIViewController, DateRangeViewControllerDele
         }
     }
     
+    
     //MARK: DateRangeViewController Delegate
     func didChangeRange(newDateRange: DateRange) {
         dateRange = newDateRange
+        tableView.reloadData()
+    }
+    
+    //MARK: Configure Switch
+    
+    func configureSwitch(){
+        autoUploadSwitch.addTarget(self, action: #selector(autoUpload), for: .valueChanged)
+        autoUploadOverWiFiSwitch.addTarget(self, action: #selector(autoUploadOverWiFiOnly), for: .valueChanged)
+    }
+    
+    //MARK: Refresh Sections
+    
+    func refreshSections(){
+        if DropBoxManager.shared.userAuthendicated(){
+            sections = [.readUpload]
+            if  HSUserDefaults.autoUploadSharedLink() != nil {
+                sections.append(.share)
+            }
+            sections.append(.logout)
+            autoUploadSwitch.setOn(HSUserDefaults.autoUpload(), animated: true)
+            autoUploadOverWiFiSwitch.setOn(HSUserDefaults.autoUploadOverWiFi(), animated: true)
+        }else {
+            sections = [.login]
+        }
         tableView.reloadData()
     }
     
@@ -151,22 +182,25 @@ extension DropboxUploadViewController: UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = UITableViewCell()
         
-        var row = sections[indexPath.section].rows()[indexPath.row]
+        let row = sections[indexPath.section].rows()[indexPath.row]
         
         cell.textLabel?.text = row.title()
         
-//        switch row {
-//        case .range:
-//            cell = UITableViewCell.init(style: UITableViewCellStyle.value1, reuseIdentifier: nil)
-//            cell.textLabel?.text = row.title()
-//            cell.detailTextLabel?.text = dateRange.displayText()
-//            cell.detailTextLabel?.numberOfLines = 0
-//            cell.accessoryType = .disclosureIndicator
-//        case .shareWithDropbox:
-//            cell.accessoryType = .disclosureIndicator
-//        default:
-////            cell.textLabel?.textColor = cell.textLabel?.tintColor
-//        }
+        switch row {
+        case .autoUpload:
+            cell.accessoryView = autoUploadSwitch
+        case .autoUploadOverWifiOnly:
+            cell.accessoryView = autoUploadOverWiFiSwitch
+        case .link,.readUpload:
+            cell.textLabel?.textColor = cell.textLabel?.tintColor
+        case .unlink:
+            cell.textLabel?.textColor = .red
+        case .showQRCode:
+            cell.accessoryType = .disclosureIndicator
+        default:
+            cell.accessoryType = .none
+            
+        }
         
         
         
@@ -196,7 +230,7 @@ extension DropboxUploadViewController: UITableViewDelegate,UITableViewDataSource
         case .readUpload:
             readUplaodData()
         case .autoUpload:
-            auotUpload()
+            autoUpload()
         case .autoUploadOverWifiOnly:
             autoUploadOverWiFiOnly()
         case .createSharedLink:
@@ -205,21 +239,34 @@ extension DropboxUploadViewController: UITableViewDelegate,UITableViewDataSource
             copyToClipboard()
         case .shareExtension:
             shareExtension()
+        case .showQRCode:
+            showQRCode()
         }
         
     }
 }
 
 extension DropboxUploadViewController {
-
+    
     //Selections
     
     func linkDropBox(){
-        
+        DropBoxManager.shared.authorizeFromController(controller: self) { (authendicated) in
+            if authendicated {
+                OperationQueue.main.addOperation {
+                    self.refreshSections()
+                }
+            }
+        }
     }
     
     func logoutDropBox(){
-        
+        UIAlertController.alert("Dropbox", message: "Are you sure you want to logout", cancelButtonTitle: "Cancel", otherButtonTitles: ["Logout"], distructiveButtonIndex: [1], viewController: self) { (selectedIndex, _) in
+            if selectedIndex == 1 {
+                DropBoxManager.shared.logoutDropbox()
+                self.refreshSections()
+            }
+        }
     }
     
     func readUplaodData(){
@@ -259,12 +306,14 @@ extension DropboxUploadViewController {
         }
     }
     
-    func auotUpload(){
-        
+    @objc func autoUpload(){
+        HSUserDefaults.setAutoUpload(!autoUploadSwitch.isOn)
+        refreshSections()
     }
     
-    func autoUploadOverWiFiOnly() {
-        
+    @objc func autoUploadOverWiFiOnly() {
+        HSUserDefaults.setAutoUploadOverWifi(!autoUploadOverWiFiSwitch.isOn)
+        refreshSections()
     }
     
     func createShareLink() {
@@ -276,6 +325,10 @@ extension DropboxUploadViewController {
     }
     
     func shareExtension(){
+        
+    }
+    
+    func showQRCode(){
         
     }
     
