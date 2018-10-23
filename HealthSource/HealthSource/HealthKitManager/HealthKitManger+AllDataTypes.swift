@@ -14,18 +14,18 @@ extension HealthKtiManager{
         return [
             //            .bodyMassIndex,
             //            .bodyFatPercentage,
-            //            .height,
-            //            .bodyMass,
+                        .height,
+                        .bodyMass,
             //            .leanBodyMass,
             //            .waistCircumference,
             //Fitness
             .stepCount,
-            //            .distanceWalkingRunning,
-            //            .distanceCycling,
+                        .distanceWalkingRunning,
+                        .distanceCycling,
             //            .distanceWheelchair,
-            //            .basalEnergyBurned,
-            //            .activeEnergyBurned,
-            //            .flightsClimbed,
+                        .basalEnergyBurned,
+                        .activeEnergyBurned,
+                        .flightsClimbed,
             //            .nikeFuel,
 //            .appleExerciseTime,
             //            .pushCount,
@@ -33,11 +33,11 @@ extension HealthKtiManager{
             //            .swimmingStrokeCount,
             //            .vo2Max,
             .heartRate,
-            //            .bodyTemperature,
+                        .bodyTemperature,
             //            .basalBodyTemperature,
             //            .bloodPressureSystolic,
             //            .bloodPressureDiastolic,
-            //            .respiratoryRate,
+//                        .respiratoryRate,
             //            .restingHeartRate,
             //            .walkingHeartRateAverage,
             //            .heartRateVariabilitySDNN,
@@ -61,7 +61,7 @@ extension HealthKtiManager{
             //            .dietaryCarbohydrates,
             //            .dietaryFiber,
             //            .dietarySugar,
-            //            .dietaryEnergyConsumed,
+                        .dietaryEnergyConsumed,
             //            .dietaryProtein,
             //            .dietaryVitaminA,
             //            .dietaryVitaminB6,
@@ -98,7 +98,7 @@ extension HealthKtiManager{
         var allWriteQuantityIdentifiers = getAllReadQuantityTypeIdentifiers()
         //        allWriteQuantityIdentifiers.remove(at: allWriteQuantityIdentifiers.index(of: HKQuantityTypeIdentifier.nikeFuel)!)
 //        allWriteQuantityIdentifiers.remove(at: allWriteQuantityIdentifiers.index(of: HKQuantityTypeIdentifier.appleExerciseTime)!)
-        //        allWriteQuantityIdentifiers.remove(at: allWriteQuantityIdentifiers.index(of: HKQuantityTypeIdentifier.appleExerciseTime)!)
+//                allWriteQuantityIdentifiers.remove(at: allWriteQuantityIdentifiers.index(of: HKQuantityTypeIdentifier.appleExerciseTime)!)
         //        allWriteQuantityIdentifiers.remove(at: allWriteQuantityIdentifiers.index(of: HKQuantityTypeIdentifier.walkingHeartRateAverage)!)
         return allWriteQuantityIdentifiers
         

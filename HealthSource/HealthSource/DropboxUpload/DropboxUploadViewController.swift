@@ -109,6 +109,7 @@ class DropboxUploadViewController: UIViewController, DateRangeViewControllerDele
     private var sections:[Section] = [.login]
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.selectedIndex = 2
         self.title = "Dropbox Share"
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
@@ -285,7 +286,8 @@ extension DropboxUploadViewController {
         OperationQueue.main.addOperation {
             //Your
             
-            HealthKtiManager.shared.fetchAllHealthData(startDate: nil, endDate: nil, anchorQueryDict: HSUserDefaults.shared.getHKAnchorQueryDictionary(), completion: { (completed, anchoredDict, hksamples, error) in
+            let anchoredQueryDict = HSUserDefaults.shared.getHKAnchorQueryDictionary() as? [String:HKQueryAnchor]
+            HealthKtiManager.shared.fetchAllHealthData(startDate: nil, endDate: nil, anchorQueryDict:anchoredQueryDict, completion: { (completed, anchoredDict, hksamples, error) in
                 OperationQueue.main.addOperation {
                     var saved = false
                     if let samples = hksamples {

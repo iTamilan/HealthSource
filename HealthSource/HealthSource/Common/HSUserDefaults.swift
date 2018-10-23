@@ -14,16 +14,16 @@ typealias HSQueryAnchorDictionay = [String:HKQueryAnchor]
 class HSUserDefaults {
     static let shared = HSUserDefaults()
     
-    func getHKAnchorQueryDictionary() -> HSQueryAnchorDictionay {
+    func getHKAnchorQueryDictionary() -> Dictionary< String, Any> {
         
         if let dictinory = UserDefaults.standard.object(forKey: hkQueryAnchrodUDKey) {
-            return dictinory as! HSQueryAnchorDictionay
+            return dictinory as! Dictionary
         }
         return [:]
         
     }
     
-    func setHKQueryAnchoreDicionary(dictionory:HSQueryAnchorDictionay){
+    func setHKQueryAnchoreDicionary(dictionory:Any){
         UserDefaults.standard.set(dictionory, forKey: hkQueryAnchrodUDKey)
         UserDefaults.standard.synchronize()
     }

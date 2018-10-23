@@ -59,10 +59,14 @@ class HealthKtiManager: NSObject {
             let allReadDataType = self.getAllReadDataTypes()
             let predicte = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: HKQueryOptions.strictStartDate)
             var updateAnchorQueryDict = anchorQueryDict
+            
             if allReadDataType.count > 0 {
                 for hkObjectType in allReadDataType{
-                    
-                    let query = HKAnchoredObjectQuery.init(type: hkObjectType as! HKSampleType, predicate: predicte, anchor: updateAnchorQueryDict?[hkObjectType.identifier], limit: HKObjectQueryNoLimit, resultsHandler: { (anchorQueryobject, sample, hkDeletedObject, anchorQuery, error) in
+                    var hkAnchorquery: HKQueryAnchor?
+                    if let anchorQuery = updateAnchorQueryDict?[hkObjectType.identifier] {
+                        hkAnchorquery = anchorQuery
+                    }
+                    let query = HKAnchoredObjectQuery.init(type: hkObjectType as! HKSampleType, predicate: predicte, anchor: hkAnchorquery, limit: HKObjectQueryNoLimit, resultsHandler: { (anchorQueryobject, sample, hkDeletedObject, anchorQuery, error) in
                         self.operationQueue.addOperation {
                             self.fetchedCount += 1;
                             print("Current Fetched data type \(hkObjectType.identifier)")
@@ -70,8 +74,8 @@ class HealthKtiManager: NSObject {
                                 self.fetchedObject.append(contentsOf: samples)
                                 print("Current Fetched data type object Count  \(samples.count)")
                             }
-                            if error == nil {
-                                updateAnchorQueryDict?[hkObjectType.identifier] = anchorQuery
+                            if error == nil, let hkanchoredqueryObject = anchorQuery {
+                                updateAnchorQueryDict?[hkObjectType.identifier] = hkanchoredqueryObject
                             }
                             print("Total Fetched count \(self.fetchedCount)");
                             print("Total Fetched object count \(self.fetchedObject.count)");
@@ -82,6 +86,9 @@ class HealthKtiManager: NSObject {
                                 print("Total fetched objects \(self.fetchedObject.count)");
                                 self.fetchedCount = -1
                                 completion(true, updateAnchorQueryDict,self.fetchedObject,nil)
+//                                Array
+//                                _ = Array<Any>()
+//                                Dictionary<<#Key: Hashable#>, Any>
                             }
                         }
                     })
@@ -165,18 +172,16 @@ class HealthKtiManager: NSObject {
         guard oldSample != nil else {
             return nil
         }
-        switch oldSample!.sampleType.identifier {
-        case HKQuantityTypeIdentifier.stepCount.rawValue:
-            fallthrough
-        case HKQuantityTypeIdentifier.heartRate.rawValue:
+        if oldSample is HKQuantitySample {
             return getNewHKQuantitySampleFromOldHKSample(oldSample:(oldSample as? HKQuantitySample)!)
-        case HKWorkoutTypeIdentifier:
-            return getWorkoutEventsOldHKSample(oldHKWorkout:(oldSample as? HKWorkout)!)
-        case HKCategoryTypeIdentifier.sleepAnalysis.rawValue:
+            
+        }else if (oldSample is HKCategorySample){
             return getNewHKCategorySampleFromOldHKSample(oldSample: (oldSample as? HKCategorySample)!)
-        default:
-            return nil
+        }else if (oldSample is HKWorkout){
+            return getWorkoutEventsOldHKSample(oldHKWorkout:(oldSample as? HKWorkout)!)
+
         }
+        return nil;
         
     }
     func getNewHKQuantitySampleFromOldHKSample(oldSample: HKQuantitySample) -> HKSample{

@@ -86,7 +86,7 @@ import HealthKit
 extension HSPersistentStore {
     public func saveHKSamples(_ hkSamples:[HKSample]){
         DispatchQueue.main.async {
-        
+            
             let managedObjectContext = self.container.viewContext
             for sample in hkSamples {
                 if(sample.sourceRevision.source.bundleIdentifier == Bundle.main.bundleIdentifier){
